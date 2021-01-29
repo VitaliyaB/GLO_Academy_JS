@@ -1,9 +1,9 @@
-const money = 1000; // monthly income
-const income = 500; // additional income
-const addExpenses = 'Phone, Intetnet, Taxi, Bills'; // additional expenses
-const deposit = true; // have deposit?
-const mission = 10000; // amount of savings
-const period = 6; // period of savings
+let money = 1000; // monthly income
+let income = 500; // additional income
+let addExpenses = 'Phone, Intetnet, Taxi, Bills'; // additional expenses
+let deposit = true; // have deposit?
+let mission = 10000; // amount of savings
+let period = 6; // period of savings
 
 // first task: output the data type of money, income, deposit
 console.log('money: ', typeof money);
