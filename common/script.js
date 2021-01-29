@@ -17,7 +17,7 @@ console.log('addExpenses length: ', addExpenses.length);
 console.log('The period of savings is equal (month): ' + period + '\nThe mission to earn money is ' + mission + ' USD');
 
 // fourth task: addExpenses to lower case and make an array
-console.log('The array of addintional expenses: ', addExpenses.toLocaleLowerCase().split(', '));
+console.log('The array of addintional expenses: ', addExpenses.toLowerCase().split(', '));
 
 // fifth task: declare variables budgetDay and count budgetDay
 let budgetDay = money / 30;
