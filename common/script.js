@@ -1,15 +1,15 @@
 'use strict';
 
-let money = +prompt('Ваш месячный доход?'); // monthly income
+let money = +prompt('Ваш месячный доход?', 1000); // monthly income
 let income = 100; // additional income
-let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'); // additional expenses
+let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Одежда, техника, развлечения'); // additional expenses
 let deposit = confirm('Есть ли у вас депозит в банке?'); // have deposit?
 let mission = 10000; // amount of savings
 let period = 6; // period of savings
-let expenses1 = prompt('Введите обязательную статью расходов?'); // required expenses item 1
-let amount1 = prompt('Во сколько это обойдется?'); // cost of expenses item 1
-let expenses2 = prompt('Введите обязательную статью расходов?'); // required expenses item 2
-let amount2 = prompt('Во сколько это обойдется?'); // cost of expenses item 2
+let expenses1 = prompt('Введите обязательную статью расходов?', 'Комуналка'); // required expenses item 1
+let amount1 = prompt('Во сколько это обойдется?', '100'); // cost of expenses item 1
+let expenses2 = prompt('Введите обязательную статью расходов?', 'Телефон'); // required expenses item 2
+let amount2 = prompt('Во сколько это обойдется?', '50'); // cost of expenses item 2
 let budgetMonth = money + income - amount1 - amount2; // count month budget
 let budgetDay = budgetMonth / 30;
 
