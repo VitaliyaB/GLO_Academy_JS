@@ -9,7 +9,6 @@ let arr = [
 
 do {
   lang = prompt('Введите язык для отображения', 'ru либо en').toLowerCase();
-  console.log(lang);
 } while (lang !== 'ru' && lang !== 'en' && lang);
 
 // variant a.
@@ -27,6 +26,8 @@ switch (lang) {
   case 'en':
     console.log('Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday');
     break;
+  default:
+    console.log('Не выбран подходящий язык.');
 }
 
 // variant c.
