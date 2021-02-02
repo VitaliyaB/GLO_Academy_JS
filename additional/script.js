@@ -8,7 +8,7 @@ let checkString = function (data) {
   data = data.trim();
 
   if (data.length > 30) {
-    return data.substring(0, 31) + '...';
+    return data.substring(0, 30) + '...';
   }
 
   return data;
