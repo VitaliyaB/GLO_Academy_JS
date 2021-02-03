@@ -23,6 +23,8 @@ let start = function () {
   money = Number(money);
 };
 
+start();
+
 // sum of all expenses
 let getExpensesMonth = function() {
   let sum = 0;
@@ -82,8 +84,6 @@ function getStatusIncome(budget) {
 
 let accumulatedMonth = getAccumulatedMonth(money, expensesAmount);
 let budgetDay = accumulatedMonth / 30;
-
-start();
 
 // output the data type of money, income, deposit
 console.log('money: ', showTypeOf(money));
