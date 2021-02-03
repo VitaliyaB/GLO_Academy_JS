@@ -9,3 +9,27 @@ for (let i = 0; i < arr.length; i++) {
   }
 }
 
+console.log('**************************************');
+
+// * Part two (output all primes from 1 to 100)
+for (let i = 1; i <= 100; i++) {
+  let count = 0;
+
+  if (i === 1) {
+    continue;
+  }
+
+  for(let k = 2; k <= i; k++) {
+    if (i % k === 0 && k < i) {
+      break;
+    }
+
+    if (i % k !==0 && k < i) {
+      continue;
+    }
+
+    if (k === i) {
+      console.log(i + ' Делители этого числа: 1 и ' + i);
+    }
+  }
+}
