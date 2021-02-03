@@ -19,16 +19,12 @@ for (let i = 1; i <= 100; i++) {
     continue;
   }
 
-  for(let k = 2; k <= i; k++) {
+  for (let k = 2; k <= i; k++) {
     if (i % k === 0 && k < i) {
       break;
-    }
-
-    if (i % k !==0 && k < i) {
+    } else if (i % k !==0 && k < i) {
       continue;
-    }
-
-    if (k === i) {
+    } else {
       console.log(i + ' Делители этого числа: 1 и ' + i);
     }
   }
