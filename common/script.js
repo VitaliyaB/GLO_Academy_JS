@@ -1,6 +1,6 @@
 'use strict';
 
-let startBot = function() {
+let getRandomNum = function() {
   // random number
   let getRandomInt = function (min, max) {
     min = Math.ceil(min);
@@ -11,13 +11,8 @@ let startBot = function() {
   let choosenNumber = getRandomInt(1, 100);
   console.log('choosenNumber: ', choosenNumber);
 
-  // check user input
-  let isNumber = function(num) {
-    return !isNaN(num) && isFinite(num);
-  };
-
-  // user input 
-  let askUserNumber = function() {
+  // user input
+  return function askUserNumber() {
     let number = prompt('Угадай число от 1 до 100');
 
     if (number === null) {
@@ -27,12 +22,17 @@ let startBot = function() {
       number = parseFloat(number);
     }
 
+    // check user input
+    let isNumber = function() {
+      return !isNaN(number) && isFinite(number);
+    };
+
     // compare user num and choosen num
-    let checkUserNumber = function(num) {
-      if (num > choosenNumber) {
+    let checkUserNumber = function() {
+      if (number > choosenNumber) {
         alert('Загаданное число меньше');
         askUserNumber();
-      } else if (num < choosenNumber) {
+      } else if (number < choosenNumber) {
         alert('Загаданное число больше');
         askUserNumber();
       } else {
@@ -40,15 +40,17 @@ let startBot = function() {
       }
     };
 
-    if (isNumber(number) && number >= 1 && number <= 100) {
-      checkUserNumber(number);
+    if (isNumber() && number >= 1 && number <= 100) {
+      checkUserNumber();
     } else {
       alert('Введи число!');
       askUserNumber();
     }
-  };
 
-  askUserNumber();
+  };
 };
 
-startBot();
+let starBot = getRandomNum();
+let userGame = starBot();
+
+console.dir(starBot);
