@@ -1,106 +1,103 @@
 'use strict';
 
-let money; // monthly income
-let income = 'Фриланс'; // additional income
-let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 
-                          'Одежда, техника, развлечения'); // additional expenses
-let deposit = confirm('Есть ли у вас депозит в банке?'); // have deposit?
-let mission = 10000; // amount of savings
-let period = 6; // period of savings
-let expenses = [];
+let money,
+  // monthly income
+  start = function () {
+    do {
+      money = prompt('Ваш месячный доход?', 10000);
+    } while (!isNumber(money));
 
-// check data for a number
-let isNumber = function (data) {
-  return !isNaN(parseFloat(data)) && isFinite(data);
-};
-
-// monthly income
-let start = function () {
-  do {
-    money = prompt('Ваш месячный доход?', 10000);
-  } while (!isNumber(money));
-
-  money = Number(money);
-};
+    money = parseFloat(money);
+  };
 
 start();
 
-// sum of all expenses
-let getExpensesMonth = function() {
-  let sum = 0;
+let appData = {
+  income: {},
+  addIncome: [],
+  expenses: {},
+  addExpenses: [],
+  deposit: false,
+  mission: 50000,
+  period: 6,
+  budget: money,
+  budgetDay: 0,
+  budgetMonth: 0,
+  expensesMonth: 0,
 
-  for (let i = 0; i < 2; i++) {
-    let amountAnswer;
+  asking: function () {
+    let addExpenses = prompt(
+      'Перечислите возможные расходы за рассчитываемый период через запятую',
+      'Одежда, техника, развлечения'
+    );
 
-    expenses[i] = prompt('Введите обязательную статью расходов?', 'Комуналка');
+    appData.addExpenses = addExpenses.toLowerCase().split(", ");
+    appData.deposit = confirm('Есть ли у вас депозит в банке?');
 
-    do {
-      amountAnswer = prompt('Во сколько это обойдется?', 100);
-    } while (!isNumber(amountAnswer));
+    for (let i = 0; i < 2; i++) {
+      let amountAnswer;
+      let expense = prompt(
+        'Введите обязательную статью расходов?',
+        'Комуналка'
+      );
 
-    sum += +amountAnswer;
-  }
+      do {
+        amountAnswer = prompt('Во сколько это обойдется?', 100);
+      } while (!isNumber(amountAnswer));
 
-  return sum;
+      amountAnswer = parseFloat(amountAnswer);
+
+      appData.expenses[expense] = amountAnswer;
+    }
+  },
+
+  getExpensesMonth: function () {
+    for (let key in appData.expenses) {
+      appData.expensesMonth += appData.expenses[key];
+    }
+  },
+
+  getBudget: function () {
+    appData.budgetMonth = appData.budget - appData.expensesMonth;
+    appData.budgetDay = Math.floor(appData.budgetMonth / 30);
+  },
+
+  getTargetMonth: function () {
+    return Math.ceil(appData.mission / appData.budgetMonth);
+  },
+
+  getStatusIncome: function () {
+    switch (true) {
+      case appData.budgetDay >= 1200:
+        return 'У вас высокий уровень дохода';
+      case appData.budgetDay >= 600 && appData.budgetDay < 1200:
+        return 'У вас средний уровень дохода';
+      case appData.budgetDay >= 0 && appData.budgetDay < 600:
+        return 'К сожалению у вас уровень дохода ниже среднего';
+      default:
+        return 'Что-то пошло не так';
+    }
+  },
 };
 
-let expensesAmount = getExpensesMonth();
-
-// savings per month
-let getAccumulatedMonth = function(money, amountExpenses) {
-  return money - amountExpenses;
-};
-
-// count time to achieve mission
-let getTargetMonth = function(goal, monthBudget) {
-  if (Math.ceil(goal / monthBudget) < 0) {
-    return 'Цель не будет достигнута';
-  } else {
-    return 'Цель будет достигнута';
-  }
-};
-
-// return the data type
-let showTypeOf = function(a) {
-  return typeof a;
-};
-
-// status income
-function getStatusIncome(budget) {
-  switch (true) {
-    case budget >= 1200:
-      console.log('У вас высокий уровень дохода');
-      break;
-    case (budget >= 600 && budget < 1200):
-      console.log('У вас средний уровень дохода');
-      break;
-    case (budget >= 0 && budget < 600):
-      console.log('К сожалению у вас уровень дохода ниже среднего');
-      break;
-    default:
-      console.log('Что-то пошло не так');
-  }
-}
-
-let accumulatedMonth = getAccumulatedMonth(money, expensesAmount);
-let budgetDay = accumulatedMonth / 30;
-
-// output the data type of money, income, deposit
-console.log('money: ', showTypeOf(money));
-console.log('income: ', showTypeOf(income));
-console.log('deposit: ', showTypeOf(deposit));
+appData.asking();
+appData.getExpensesMonth();
+appData.getBudget();
 
 // output sum of all expenses
-console.log('Расходы за месяц: ', expensesAmount);
-
-// addExpenses to lower case and make an array
-console.log('Массив дополнительных расходов: ', addExpenses.toLowerCase().split(', '));
+console.log('Расходы за месяц: ', appData.expensesMonth);
 
 // mission will be achieved in ... month
-console.log('Цель будет достигнута за (месяц): ', getTargetMonth(mission, accumulatedMonth));
-
-// output budgetDay
-console.log('Бюджет на день: ', Math.floor(budgetDay));
+console.log('Цель будет достигнута за (месяц): ', appData.getTargetMonth());
 
 // output income status
-getStatusIncome(budgetDay);
+console.log('Уровен дохода: ', appData.getStatusIncome());
+
+for (let key in appData) {
+  console.log('Наша программа включает в себя все данные:\n' + key + ' ' + appData[key]);
+}
+
+// check data for a number
+function isNumber(data) {
+  return !isNaN(parseFloat(data)) && isFinite(parseFloat(data));
+}
