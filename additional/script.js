@@ -11,7 +11,7 @@ if (weekDayToday) {
 }
 
 for (let i = 0; i < week.length; i++) {
-  if ((i === 5 && weekDayToday === 5 || (i === 6 && weekDayToday === 6))) {
+  if ((i === 5 && weekDayToday === 5) || (i === 6 && weekDayToday === 6)) {
     weekList += `<li><i><b>${week[i]}</b></i></li>`;
   } else if (i === 5 || i === 6) {
     weekList += `<li><i>${week[i]}</i></li>`;
