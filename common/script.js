@@ -28,26 +28,30 @@ let appData = {
   expensesMonth: 0,
 
   asking: function () {
-    let cashIncome, itemIncome;
+    let cashIncome, itemIncome, addExpenses;
 
     if (confirm('Есть ли у вас дополнительный источник заработка?')) {
       do {
         itemIncome = prompt('Какой у вас дополнительный заработок?', 'Таксую');
-      } while (isNumber(itemIncome));
+      } while (isNumber(itemIncome) || itemIncome === null || itemIncome.trim() === '');
 
       do {
         cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?', 10000);
       } while (!isNumber(cashIncome));
 
+      itemIncome = itemIncome.trim();
       cashIncome = parseFloat(cashIncome);
       appData.income[itemIncome] = cashIncome;
     }
 
-    let addExpenses = prompt(
-      'Перечислите возможные расходы за рассчитываемый период через запятую',
-      'Одежда, техника, развлечения'
-    );
+    do {
+      addExpenses = prompt(
+        'Перечислите возможные расходы за рассчитываемый период через запятую',
+        'Одежда, техника, развлечения'
+      );
+    } while (isNumber(addExpenses) || addExpenses === null || addExpenses.trim() === '');
 
+    addExpenses = addExpenses.trim();
     appData.addExpenses = addExpenses.toLowerCase().split(", ");
     appData.deposit = confirm('Есть ли у вас депозит в банке?');
 
@@ -59,12 +63,13 @@ let appData = {
           'Введите обязательную статью расходов?',
           'Комуналка'
         );
-      } while (isNumber(expense));
+      } while (isNumber(expense) || expense === null || expense.trim() === '');
 
       do {
         amountAnswer = prompt('Во сколько это обойдется?', 100);
       } while (!isNumber(amountAnswer));
 
+      expense = expense.trim();
       amountAnswer = parseFloat(amountAnswer);
       appData.expenses[expense] = amountAnswer;
     }
@@ -101,7 +106,7 @@ let appData = {
   getInfoDeposit: function() {
     if (appData.deposit) {
       do {
-        appData.percentDeposit = prompt('Какой годовой процент?', '10');
+        appData.percentDeposit = prompt('Какой годовой процент?', 10);
       } while (!isNumber(appData.percentDeposit));
 
       do {
