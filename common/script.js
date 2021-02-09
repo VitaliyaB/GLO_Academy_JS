@@ -88,7 +88,7 @@ let appData = {
     } while (isNumber(addExpenses) || addExpenses === null || addExpenses.trim() === '');
 
     addExpenses = addExpenses.trim();
-    appData.addExpenses = addExpenses.toLowerCase().split(", ");
+    appData.addExpenses = addExpenses.toLowerCase().split(",");
     appData.deposit = confirm('Есть ли у вас депозит в банке?');
 
     for (let i = 0; i < 2; i++) {
@@ -180,7 +180,7 @@ for (let key in appData) {
   console.log('Наша программа включает в себя все данные:\n' + key + ' ' + appData[key]);
 }
 
-appData.addExpenses = appData.addExpenses.map(item => item[0].toUpperCase() + item.substring(1));
+appData.addExpenses = appData.addExpenses.map(item => item.trim().substring(0, 1).toUpperCase() + item.trim().substring(1));
 console.log('Дополнителные расходы: ', appData.addExpenses.join(', '));
 
 // check data for a number
