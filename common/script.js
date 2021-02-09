@@ -1,21 +1,9 @@
 'use strict';
 
-let incomeAddBtn, expensesAddBtn;
 let startBtn = document.getElementById('start');
 let buttonTag = document.getElementsByTagName('button');
-
-for (let i = 0; i < buttonTag.length; i++) {
-  if (buttonTag[i].classList.contains('income_add')) {
-    incomeAddBtn = buttonTag[i];
-    continue;
-  }
-
-  if (buttonTag[i].classList.contains('expenses_add')) {
-    expensesAddBtn = buttonTag[i];
-    continue;
-  }
-}
-
+let incomeAddBtn = buttonTag[0];
+let expensesAddBtn = buttonTag[1];
 let depositCheckmark = document.querySelector('#deposit-check');
 let additionalInput = document.querySelectorAll('.additional_income-item');
 
