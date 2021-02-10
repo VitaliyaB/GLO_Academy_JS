@@ -49,8 +49,8 @@ function updateTime() {
     );
   let currentTime = formatTime(date, month, year, hours, minutes, seconds);
 
-  elemFullDate.innerHTML = currentTimeFull;
-  elemDate.innerHTML = currentTime;
+  elemFullDate.textContent = currentTimeFull;
+  elemDate.textContent = currentTime;
 }
 
 function formatTimeFull(day, date, month, year, hours, minutes, seconds) {
