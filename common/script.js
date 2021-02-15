@@ -36,7 +36,6 @@ let incomeItems = document.querySelectorAll('.income-items');
 start.disabled = 'disabled';
 start.style.cursor = 'not-allowed';
 
-
 let appData = {
   budget: 0,
   budgetDay: 0,
@@ -150,7 +149,6 @@ let appData = {
     incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
     incomeItems = document.querySelectorAll('.income-items');
     dataInputsText = dataForm.querySelectorAll('[type="text"]');
-
 
     if (incomeItems.length === 3) {
       incomePlus.style.display = 'none';
