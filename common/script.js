@@ -231,11 +231,11 @@ let appData = {
 
   getStatusIncome: function() {
     switch (true) {
-      case appData.budgetDay >= 1200:
+      case this.budgetDay >= 1200:
         return 'У вас высокий уровень дохода';
-      case appData.budgetDay >= 600 && appData.budgetDay < 1200:
+      case this.budgetDay >= 600 && this.budgetDay < 1200:
         return 'У вас средний уровень дохода';
-      case appData.budgetDay >= 0 && appData.budgetDay < 600:
+      case this.budgetDay >= 0 && this.budgetDay < 600:
         return 'К сожалению у вас уровень дохода ниже среднего';
       default:
         return 'Что-то пошло не так';
@@ -243,17 +243,17 @@ let appData = {
   },
 
   getInfoDeposit: function() {
-    if (appData.deposit) {
+    if (this.deposit) {
       do {
-        appData.percentDeposit = prompt('Какой годовой процент?', 10);
-      } while (!isNumber(appData.percentDeposit));
+        this.percentDeposit = prompt('Какой годовой процент?', 10);
+      } while (!isNumber(this.percentDeposit));
 
       do {
-        appData.moneyDeposit = prompt('Какая сумма заложена?', 10000);
-      } while (!isNumber(appData.moneyDeposit));
+        this.moneyDeposit = prompt('Какая сумма заложена?', 10000);
+      } while (!isNumber(this.moneyDeposit));
 
-      appData.percentDeposit = parseFloat(appData.percentDeposit);
-      appData.moneyDeposit = parseFloat(appData.moneyDeposit);
+      this.percentDeposit = parseFloat(this.percentDeposit);
+      this.moneyDeposit = parseFloat(this.moneyDeposit);
     }
   },
 
@@ -266,47 +266,50 @@ let appData = {
   },
 
   changeIncomePeriod: function() {
-    let calc = appData.calcPeriod();
+    let calc = this.calcPeriod();
     incomePeriodValue.value = calc;
   },
 
   reset: function() {
-    appData.budget = 0;
-    appData.budgetDay = 0;
-    appData.budgetMonth = 0;
-    appData.income = {};
-    appData.incomeMonth = 0;
-    appData.addIncome = [];
-    appData.expenses = {};
-    appData.expensesMonth = 0;
-    appData.addExpenses = [];
-    appData.deposit = false;
-    appData.percentDeposit = 0;
-    appData.moneyDeposit = 0;
+    this.budget = 0;
+    this.budgetDay = 0;
+    this.budgetMonth = 0;
+    this.income = {};
+    this.incomeMonth = 0;
+    this.addIncome = [];
+    this.expenses = {};
+    this.expensesMonth = 0;
+    this.addExpenses = [];
+    this.deposit = false;
+    this.percentDeposit = 0;
+    this.moneyDeposit = 0;
+
     periodSelect.value = 1;
     start.style.display = 'block';
     cancel.style.display = 'none';
 
-    if (incomeItems.length > 1) {
-      for (let i = incomeItems.length - 1; incomeItems.length > 1; i--) {
+    incomeItems = document.querySelectorAll('.income-items');
+    expensesItems = document.querySelectorAll('.expenses-items');
+
+    let incomeItemsLength = incomeItems.length;
+    let expensesItemsLength = expensesItems.length;
+
+    if (incomeItemsLength > 1) {
+      for (let i = incomeItemsLength - 1; incomeItemsLength > 1; i--) {
         incomeItems[i].remove();
-        incomeItems = document.querySelectorAll('.income-items');
+        incomeItemsLength--;
       }
 
-      if (incomePlus.style.display === 'none') {
-        incomePlus.style.display = 'block';
-      }
+      incomePlus.style.display = 'block';
     }
 
-    if (expensesItems.length > 1) {
-      for (let i = expensesItems.length - 1; expensesItems.length > 1; i--) {
+    if (expensesItemsLength > 1) {
+      for (let i = expensesItemsLength - 1; expensesItemsLength > 1; i--) {
         expensesItems[i].remove();
-        expensesItems = document.querySelectorAll('.expenses-items');
+        expensesItemsLength--;
       }
 
-      if (expensesPlus.style.display === 'none') {
-        expensesPlus.style.display = 'block';
-      }
+      incomePlus.style.display = 'block';
     }
 
     dataInputsText.forEach(function(item) {
@@ -314,13 +317,14 @@ let appData = {
       item.value = '';
     });
 
-    appData.showResult();
+    this.showResult();
+    this.getPeriod();
   }
 };
 
 salaryAmount.addEventListener('input', appData.enableStartBtn);
-start.addEventListener('click', hardBind);
-cancel.addEventListener('click', appData.reset);
+start.addEventListener('click', appData.start.bind(appData));
+cancel.addEventListener('click', appData.reset.bind(appData));
 incomePlus.addEventListener('click', appData.addIncomeBlock);
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 periodSelect.addEventListener('input', appData.getPeriod);
@@ -328,9 +332,4 @@ periodSelect.addEventListener('input', appData.getPeriod);
 // check data for a number
 function isNumber(data) {
   return !isNaN(parseFloat(data)) && isFinite(data);
-}
-
-// this bind appData while start
-function hardBind() {
-  appData.start.call(appData);
 }
