@@ -340,7 +340,7 @@ AppData.prototype.eventsListeners = function() {
 
 AppData.prototype.isNumber = function(data) {
   return !isNaN(parseFloat(data)) && isFinite(data);
-}
+};
 
 let appData = new AppData();
 appData.eventsListeners();
