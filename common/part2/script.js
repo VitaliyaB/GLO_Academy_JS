@@ -323,7 +323,6 @@ AppData.prototype.reset = function() {
 };
 
 AppData.prototype.eventsListeners = function() {
-  console.log('event ', this);
   salaryAmount.addEventListener('input', this.enableStartBtn);
   start.addEventListener('click', this.start.bind(this));
   cancel.addEventListener('click', this.reset.bind(this));
