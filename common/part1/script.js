@@ -68,7 +68,7 @@ class AppData {
       return;
     }
 
-    dataInputsText.forEach(function(item) {
+    dataInputsText.forEach((item) => {
       item.disabled = 'disabled';
     });
 
@@ -101,6 +101,7 @@ class AppData {
 
   addExpensesBlock() {
     const cloneExpensesItem = expensesItems[0].cloneNode(true);
+
     cloneExpensesItem.querySelector('.expenses-title').value = '';
     cloneExpensesItem.querySelector('.expenses-amount').value = '';
 
@@ -114,7 +115,7 @@ class AppData {
   }
 
   getExpenses() {
-    expensesItems.forEach(function(item) {
+    expensesItems.forEach((item) => {
       const itemExpenses = item.querySelector('.expenses-title').value.trim();
       const cashExpenses = item.querySelector('.expenses-amount').value.trim();
 
@@ -144,6 +145,7 @@ class AppData {
 
   addIncomeBlock() {
     const cloneIncomeItem = incomeItems[0].cloneNode(true);
+
     cloneIncomeItem.querySelector('.income-title').value = '';
     cloneIncomeItem.querySelector('.income-amount').value = '';
 
@@ -157,7 +159,7 @@ class AppData {
   }
 
   getIncome() {
-    incomeItems.forEach(function(item) {
+    incomeItems.forEach((item) => {
       const itemIncome = item.querySelector('.income-title').value.trim();
       const cashIncome = item.querySelector('.income-amount').value.trim();
 
@@ -187,7 +189,7 @@ class AppData {
 
   getAddExpenses() {
     const addExpenses = additionalExpensesItem.value.split(',');
-    addExpenses.forEach(function(item) {
+    addExpenses.forEach((item) => {
       item = item.trim();
       if(item !== '') {
         this.addExpenses.push(item);
@@ -196,7 +198,7 @@ class AppData {
   }
 
   getAddIncome() {
-    additionalIncomeItem.forEach(function(item) {
+    additionalIncomeItem.forEach((item) => {
       const itemValue = item.value.trim();
 
       if (itemValue !== '') {
@@ -312,7 +314,7 @@ class AppData {
       expensesPlus.style.display = 'block';
     }
 
-    dataInputsText.forEach(function(item) {
+    dataInputsText.forEach((item) => {
       item.disabled = '';
       item.value = '';
     });
