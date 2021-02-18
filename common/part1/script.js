@@ -140,7 +140,7 @@ class AppData {
       }
 
       this.expenses[itemExpenses] = cashExpenses;
-    }, this);
+    });
   }
 
   addIncomeBlock() {
@@ -184,7 +184,7 @@ class AppData {
       }
 
       this.income[itemIncome] = cashIncome;
-    }, this);
+    });
   }
 
   getAddExpenses() {
@@ -194,7 +194,7 @@ class AppData {
       if(item !== '') {
         this.addExpenses.push(item);
       }
-    }, this);
+    });
   }
 
   getAddIncome() {
@@ -204,7 +204,7 @@ class AppData {
       if (itemValue !== '') {
         this.addIncome.push(itemValue);
       }
-    }, this);
+    });
   }
 
   getExpensesMonth() {
