@@ -32,6 +32,11 @@ let periodSelect = document.querySelector('.period-select');
 let periodAmount = document.querySelector('.period-amount');
 let additionalExpensesItem = document.querySelector('.additional_expenses-item');
 let incomeItems = document.querySelectorAll('.income-items');
+const depositBank = document.querySelector('.deposit-bank');
+const depositAmount = document.querySelector('.deposit-amount');
+const depositPercent = document.querySelector('.deposit-percent');
+
+let timerId;
 
 start.disabled = 'disabled';
 start.style.cursor = 'not-allowed';
@@ -53,7 +58,7 @@ class AppData {
   }
 
   enableStartBtn() {
-    if (salaryAmount.value) {
+    if (salaryAmount.value && (!depositCheck.checked || depositPercent.value)) {
       start.disabled = null;
       start.style.cursor = 'pointer';
     } else {
@@ -62,29 +67,39 @@ class AppData {
     }
   }
 
+  checkDepositPercent() {
+    if (!this.isNumber(depositPercent.value) || (depositPercent.value < 1 || depositPercent.value > 100)) {
+      alert('Введите корректное значение в поле проценты');
+      depositPercent.value = '';
+    } else {
+      this.enableStartBtn();
+    }
+
+  }
+
   start() {
     if (!this.isNumber(salaryAmount.value)) {
       alert('Ошибка, поле "Месячный доход" должно содержать только цифры!');
       return;
     }
 
-    dataInputsText.forEach((item) => {
-      item.disabled = 'disabled';
-    });
-
-    start.style.display = 'none';
-    cancel.style.display = 'block';
-
     this.budget = parseFloat(salaryAmount.value.trim());
 
-    this.getIncome();
-    this.getAddIncome();
-    this.getIncomeMonth();
-    this.getExpenses();
-    this.getAddExpenses();
-    this.getExpensesMonth();
-    this.getBudget();
-    this.showResult();
+    if (this.getIncome() && this.getExpenses() && this.getInfoDeposit()) {
+      dataInputsText.forEach((item) => {
+        item.disabled = 'disabled';
+      });
+
+      start.style.display = 'none';
+      cancel.style.display = 'block';
+
+      this.getAddIncome();
+      this.getIncomeMonth();
+      this.getAddExpenses();
+      this.getExpensesMonth();
+      this.getBudget();
+      this.showResult();
+    }
   }
 
   showResult() {
@@ -115,32 +130,39 @@ class AppData {
   }
 
   getExpenses() {
+    let checkResult = true;
     expensesItems.forEach((item) => {
       const itemExpenses = item.querySelector('.expenses-title').value.trim();
       const cashExpenses = item.querySelector('.expenses-amount').value.trim();
 
       if (this.isNumber(itemExpenses) && itemExpenses !== '') {
         alert('Ошибка, в разделе "Обязательные расходы" поле наименование не должно содержать только цифры!');
+        checkResult = false;
         return;
       }
 
       if (!this.isNumber(cashExpenses) && cashExpenses !== '') {
         alert('Ошибка, в разделе "Обязательные расходы" поле сумма должно содержать только цифры!');
+        checkResult = false;
         return;
       }
 
       if (itemExpenses && !cashExpenses) {
         alert('Ошибка, в разделе "Обязательные расходы" поле сумма не должно быть пустым');
+        checkResult = false;
         return;
       }
 
       if (!itemExpenses && cashExpenses) {
         alert('Ошибка, в разделе "Обязательные расходы" поле наименование не должно быть пустым');
+        checkResult = false;
         return;
       }
 
       this.expenses[itemExpenses] = cashExpenses;
     });
+
+    return checkResult;
   }
 
   addIncomeBlock() {
@@ -159,32 +181,39 @@ class AppData {
   }
 
   getIncome() {
+    let checkResult = true;
     incomeItems.forEach((item) => {
       const itemIncome = item.querySelector('.income-title').value.trim();
       const cashIncome = item.querySelector('.income-amount').value.trim();
 
       if (this.isNumber(itemIncome) && itemIncome !== '') {
         alert('Ошибка, в разделе "Дополнительный доход" поле наименование не должно содержать только цифры!');
+        checkResult = false;
         return;
       }
 
       if (!this.isNumber(cashIncome) && cashIncome !== '') {
         alert('Ошибка, в разделе "Дополнительный доход" поле сумма должно содержать только цифры!');
+        checkResult = false;
         return;
       }
 
       if (itemIncome && !cashIncome) {
         alert('Ошибка, в разделе "Дополнительный доход" поле сумма не должно быть пустым');
+        checkResult = false;
         return;
       }
 
       if (!itemIncome && cashIncome) {
         alert('Ошибка, в разделе "Дополнительный доход" поле наименование не должно быть пустым');
+        checkResult = false;
         return;
       }
 
       this.income[itemIncome] = cashIncome;
     });
+
+    return checkResult;
   }
 
   getAddExpenses() {
@@ -220,7 +249,9 @@ class AppData {
   }
 
   getBudget() {
-    this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth;
+    const monthDeposit = this.moneyDeposit * (this.percentDeposit / 100);
+
+    this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + monthDeposit;
     this.budgetDay = Math.floor(this.budgetMonth / 30);
   }
 
@@ -247,16 +278,63 @@ class AppData {
 
   getInfoDeposit() {
     if (this.deposit) {
-      do {
-        this.percentDeposit = prompt('Какой годовой процент?', 10);
-      } while (!this.isNumber(this.percentDeposit));
+      if (!depositBank.value) {
+        alert('Ошибка, в разделе "Депозит" должен быть выбран процент');
+        return false;
+      }
 
-      do {
-        this.moneyDeposit = prompt('Какая сумма заложена?', 10000);
-      } while (!this.isNumber(this.moneyDeposit));
+      if (!this.isNumber(depositAmount.value)) {
+        alert('Ошибка, в разделе "Депозит" поле сумма должно быть заполнено и содержать только цифры!');
+        return false;
+      }
 
-      this.percentDeposit = parseFloat(this.percentDeposit);
-      this.moneyDeposit = parseFloat(this.moneyDeposit);
+      this.percentDeposit = parseFloat(depositPercent.value);
+      this.moneyDeposit = parseFloat(depositAmount.value);
+      return true;
+    }
+
+    return true;
+  }
+
+  changePercent() {
+    const valueSelect = depositBank.value;
+    if (valueSelect === 'other') {
+      depositPercent.value = '';
+      depositPercent.style.display = 'inline-block';
+      this.enableStartBtn();
+      depositPercent.addEventListener('input', () => {
+        clearTimeout(timerId);
+        if (depositBank.value) {
+          timerId = setTimeout(() => {
+            this.checkDepositPercent();
+          }, 1000);
+        }
+      });
+    } else {
+      depositPercent.style.display = 'none';
+      depositPercent.value = valueSelect;
+      this.enableStartBtn();
+    }
+
+  }
+
+  depositHandler() {
+    if (depositCheck.checked) {
+      depositBank.style.display = 'inline-block';
+      depositAmount.style.display = 'inline-block';
+      this.deposit = true;
+
+      depositBank.addEventListener('change', this.changePercent.bind(this));
+    } else {
+      depositBank.style.display = 'none';
+      depositAmount.style.display = 'none';
+      depositPercent.style.display = 'none';
+      depositBank.value = '';
+      depositAmount.value = '';
+      depositPercent.value = '';
+      this.deposit = false;
+
+      depositBank.removeEventListener('input', this.changePercent.bind(this));
     }
   }
 
@@ -314,6 +392,11 @@ class AppData {
       expensesPlus.style.display = 'block';
     }
 
+    if (depositCheck.checked) {
+      depositCheck.checked = false;
+      this.depositHandler();
+    }
+
     dataInputsText.forEach((item) => {
       item.disabled = '';
       item.value = '';
@@ -330,6 +413,7 @@ class AppData {
     incomePlus.addEventListener('click', this.addIncomeBlock);
     expensesPlus.addEventListener('click', this.addExpensesBlock);
     periodSelect.addEventListener('input', this.getPeriod);
+    depositCheck.addEventListener('change', this.depositHandler.bind(this));
   }
 
   isNumber(data) {
