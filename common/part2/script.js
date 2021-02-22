@@ -22,3 +22,18 @@ const myLesson = [
   {lesson: 15, type: 'additional', points: 1},
   {lesson: 16, type: 'additional', points: 7},
 ];
+
+function changeArray() {
+  for (let i = 0; i < myLesson.length; i++) {
+    if (myLesson[i].type === 'basic') {
+      myLesson[i].points /= 2;
+    }
+    if (myLesson[i].type === 'additional') {
+      myLesson.splice(i, 1);
+      i--;
+    }
+  }
+}
+
+changeArray();
+console.log(myLesson);
