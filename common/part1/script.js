@@ -35,6 +35,7 @@ let incomeItems = document.querySelectorAll('.income-items');
 const depositBank = document.querySelector('.deposit-bank');
 const depositAmount = document.querySelector('.deposit-amount');
 const depositPercent = document.querySelector('.deposit-percent');
+const depositCheckmark = document.querySelector('.deposit-checkmark');
 
 let timerId;
 
@@ -74,7 +75,6 @@ class AppData {
     } else {
       this.enableStartBtn();
     }
-
   }
 
   start() {
@@ -89,6 +89,13 @@ class AppData {
       dataInputsText.forEach((item) => {
         item.disabled = 'disabled';
       });
+
+      incomePlus.disabled = 'disabled';
+      expensesPlus.disabled = 'disabled';
+      depositCheck.disabled = 'disabled';
+      incomePlus.style.cursor = 'not-allowed';
+      expensesPlus.style.cursor = 'not-allowed';
+      depositCheckmark.style.cursor = 'not-allowed';
 
       start.style.display = 'none';
       cancel.style.display = 'block';
@@ -367,6 +374,8 @@ class AppData {
     periodSelect.value = 1;
     start.style.display = 'block';
     cancel.style.display = 'none';
+    start.disabled = 'disabled';
+    start.style.cursor = 'not-allowed';
 
     incomeItems = document.querySelectorAll('.income-items');
     expensesItems = document.querySelectorAll('.expenses-items');
@@ -401,6 +410,16 @@ class AppData {
       item.disabled = '';
       item.value = '';
     });
+
+    incomePlus.disabled = '';
+    expensesPlus.disabled = '';
+    depositCheck.disabled = '';
+
+    incomePlus.style.cursor = 'pointer';
+    expensesPlus.style.cursor = 'pointer';
+    depositCheckmark.style.cursor = 'pointer';
+
+    periodSelect.removeEventListener('input', this.changeIncomePeriod.bind(this));
 
     this.showResult();
     this.getPeriod();
