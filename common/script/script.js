@@ -81,6 +81,7 @@ window.addEventListener('DOMContentLoaded', () => {
           if (endPositionPopUp !== startPositionPopUp) {
             if (startPositionPopUp < 0) {
               startPositionPopUp -= startPositionPopUp;
+              console.log('intervalId=setInterval ~ startPositionPopUp', startPositionPopUp);
               popUpContent.style.top = startPositionPopUp + 'px';
             } else {
               if (endPositionPopUp % 2 === 0) {
@@ -90,6 +91,7 @@ window.addEventListener('DOMContentLoaded', () => {
               }
               popUpContent.style.top = startPositionPopUp + 'px';
             }
+              console.log('intervalId=setInterval ~ startPositionPopUp', startPositionPopUp);
           } else {
             console.log('end');
             clearInterval(intervalId);
