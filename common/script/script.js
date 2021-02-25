@@ -150,11 +150,11 @@ window.addEventListener('DOMContentLoaded', () => {
   // * Slider
   const slider = () => {
     const slide = document.querySelectorAll('.portfolio-item');
-    const btn = document.querySelectorAll('.portfolio-btn');
-    const dot = document.querySelectorAll('.dot');
     const slider = document.querySelector('.portfolio-content');
+    const portfolioDots = document.querySelector('.portfolio-dots');
     let currentSlide = 0;
     let interval;
+    let dot;
 
     const prevSlide = (elem, index, strClass) => {
       elem[index].classList.remove(strClass);
@@ -175,12 +175,25 @@ window.addEventListener('DOMContentLoaded', () => {
       nextSlide(dot, currentSlide, 'dot-active');
     };
 
-    const startSlide = (time = 3000) => {
+    const startSlide = (time = 1500) => {
       interval = setInterval(autoplay, time);
     };
 
     const stopSlide = () => {
       clearInterval(interval);
+    };
+
+    const addDots = () => {
+      for (let i = 0; i < slide.length; i++) {
+        if (i === 0) {
+          portfolioDots.insertAdjacentHTML('beforeend', `<li class="dot dot-active"></li>`);
+        } else {
+          portfolioDots.insertAdjacentHTML('beforeend', `<li class="dot"></li>`);
+        }
+      }
+
+      dot = portfolioDots.querySelectorAll('.dot');
+      startSlide();
     };
 
     slider.addEventListener('click', (event) => {
@@ -229,8 +242,7 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    startSlide(1500);
-
+    addDots();
   };
 
   countTimer('1 march 2021');
