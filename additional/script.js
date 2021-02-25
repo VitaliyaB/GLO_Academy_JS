@@ -59,7 +59,7 @@ let appData = {
       return;
     }
 
-    if (/[^\d]/.test(targetAmount.value) && targetAmount.value !== '') {
+    if (/[^\d]/.test(targetAmount.value) && (targetAmount.value) !== '') {
       alert('Ошибка, поле "Цель" должно содержать только цифры!');
       return;
     }
@@ -79,14 +79,13 @@ let appData = {
 
     appData.budget = parseFloat(salaryAmount.value.trim());
 
-    appData.getIncome();
-    appData.getAddIncome();
-    appData.getIncomeMonth();
-    appData.getExpenses();
-    appData.getAddExpenses();
-    appData.getExpensesMonth();
-    appData.getBudget();
-    appData.showResult();
+    if (appData.getIncome() && appData.getExpenses() && appData.getAddIncome()) {
+      appData.getIncomeMonth();
+      appData.getAddExpenses();
+      appData.getExpensesMonth();
+      appData.getBudget();
+      appData.showResult();
+    }
   },
 
   showResult: function() {
@@ -114,34 +113,45 @@ let appData = {
     }
   },
 
-  getExpenses: function() {
-    expensesItems.forEach(function(item) {
-      let itemExpenses = item.querySelector('.expenses-title').value.trim();
-      let cashExpenses = item.querySelector('.expenses-amount').value.trim();
+  getExpenses: function () {
+    let checkResult = true;
 
-      if (/[^\sа-яё\W_]/i.test(itemExpenses) && itemExpenses !== '') {
+    expensesItems.forEach(function(item) {
+      let itemExpenses = item.querySelector('.expenses-title').value;
+      let cashExpenses = item.querySelector('.expenses-amount').value;
+
+      if (/[^\sа-яё\W_]/i.test(itemExpenses) || /[\s]/.test(itemExpenses)) {
         alert('Ошибка, в разделе "Обязательные расходы" поле наименование должно ' +
               'содержать только русские буквы, пробелы и знаки препинания!');
-        return;
+        checkResult = false;
+        return checkResult;
       }
 
-      if (/[^\d]/.test(cashExpenses) && cashExpenses !== '') {
+      if (/[^\d]/.test(cashExpenses) || /[\s]/.test(cashExpenses)) {
         alert('Ошибка, в разделе "Обязательные расходы" поле сумма должно содержать только цифры!');
-        return;
+        checkResult = false;
+        return checkResult;
       }
 
       if (itemExpenses && !cashExpenses) {
         alert('Ошибка, в разделе "Обязательные расходы" поле сумма не должно быть пустым');
-        return;
+        checkResult = false;
+        return checkResult;
       }
 
       if (!itemExpenses && cashExpenses) {
         alert('Ошибка, в разделе "Обязательные расходы" поле наименование не должно быть пустым');
-        return;
+        checkResult = false;
+        return checkResult;
       }
+
+      itemExpenses = itemExpenses.trim();
+      cashExpenses = cashExpenses.trim();
 
       appData.expenses[itemExpenses] = cashExpenses;
     });
+
+    return checkResult;
   },
 
   addIncomeBlock: function() {
@@ -157,34 +167,44 @@ let appData = {
     }
   },
 
-  getIncome: function() {
-    incomeItems.forEach(function(item) {
-      let itemIncome = item.querySelector('.income-title').value.trim();
-      let cashIncome = item.querySelector('.income-amount').value.trim();
+  getIncome: function () {
+    let checkResult = true;
 
-      if (/[^\sа-яё\W_]/i.test(itemIncome) && itemIncome !== '') {
+    incomeItems.forEach(function (item) {
+      let itemIncome = item.querySelector('.income-title').value;
+      let cashIncome = item.querySelector('.income-amount').value;
+
+      if (/[\s]/.test(itemIncome) || /[^\sа-яё\W_]/i.test(itemIncome)) {
         alert('Ошибка, в разделе "Дополнительный доход" поле наименование должно ' +
-              'содержать только русские буквы, пробелы и знаки препинания!');
-        return;
+          'содержать только русские буквы, пробелы и знаки препинания!');
+        checkResult = false;
+        return checkResult;
       }
 
-      if (/[^\d]/.test(cashIncome) && cashIncome !== '') {
+      if (/[^\d]/.test(cashIncome) || /[\s]/.test(cashIncome)) {
         alert('Ошибка, в разделе "Дополнительный доход" поле сумма должно содержать только цифры!');
-        return;
+        checkResult = false;
+        return checkResult;
       }
 
       if (itemIncome && !cashIncome) {
         alert('Ошибка, в разделе "Дополнительный доход" поле сумма не должно быть пустым');
-        return;
+        checkResult = false;
+        return checkResult;
       }
 
       if (!itemIncome && cashIncome) {
         alert('Ошибка, в разделе "Дополнительный доход" поле наименование не должно быть пустым');
-        return;
+        checkResult = false;
+        return checkResult;
       }
+
+      itemIncome = itemIncome.trim();
+      cashIncome = cashIncome.trim();
 
       appData.income[itemIncome] = cashIncome;
     });
+    return checkResult;
   },
 
   getAddExpenses: function () {
@@ -197,14 +217,25 @@ let appData = {
     });
   },
 
-  getAddIncome: function() {
-    additionalIncomeItem.forEach(function(item) {
-      let itemValue = item.value.trim();
+  getAddIncome: function () {
+    let checkResult = true;
 
-      if (itemValue !== '') {
+    additionalIncomeItem.forEach(function(item) {
+      let itemValue = item.value;
+
+      if (/[\s]/.test(itemValue) || /[^\sа-яё\W_]/i.test(itemValue)) {
+        alert('Ошибка, в разделе "Возможный доход" поле наименование должно ' +
+          'содержать только русские буквы, пробелы и знаки препинания!');
+        checkResult = false;
+        return checkResult;
+      }
+
+      itemValue = itemValue.trim();
+      if (itemValue) {
         appData.addIncome.push(itemValue);
       }
     });
+    return checkResult;
   },
 
   getExpensesMonth: function() {
