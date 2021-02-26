@@ -55,12 +55,9 @@ const render = () => {
         const key = localStorage.key(i);
         const data = JSON.parse(localStorage.getItem(key));
 
-        if (item.firstName === data.firstName &&
-            item.lastName === data.lastName &&
-            item.login === data.login &&
-            item.password === data.password &&
-            item.regDate === data.regDate) {
+        if (item.login === data.login) {
           localStorage.removeItem(key);
+          userName.textContent = 'Аноним';
           break;
         }
       }
