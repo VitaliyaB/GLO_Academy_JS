@@ -20,8 +20,6 @@ const months = [
   'декабря'
 ];
 
-let userID;
-
 const formatDate = (num) => (num > 10 ? num : '0' + num);
 
 // * Get user data from LS
@@ -84,7 +82,6 @@ const signUp = () => {
   const hours = formatDate(signUpDate.getHours());
   const minutes = formatDate(signUpDate.getMinutes());
   const seconds = formatDate(signUpDate.getSeconds());
-  userID = localStorage.length;
   const data = getData();
 
   do {
@@ -115,7 +112,7 @@ const signUp = () => {
     regDate: `${day} ${month} ${year} г., ${hours}:${minutes}:${seconds}`
   };
 
-  localStorage.setItem(userID, JSON.stringify(userData));
+  localStorage.setItem(userLogin, JSON.stringify(userData));
 
   render();
 };
@@ -136,8 +133,8 @@ const signIn = () => {
 
   user = user.find((item) => userLogin === item.login && userPassword === item.password);
 
-  if (user.length) {
-    userName.textContent = user[0].firstName;
+  if (user) {
+    userName.textContent = user.firstName;
   } else {
     alert('Пользователь с такими данными не найден!');
   }
