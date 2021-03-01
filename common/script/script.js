@@ -8,7 +8,9 @@ window.addEventListener('DOMContentLoaded', () => {
     const timerMinutes = document.getElementById('timer-minutes');
     const timerSeconds = document.getElementById('timer-seconds');
 
-    function getTimeRemaining() {
+    const formatTime = (num) => (num >= 10 ? num : '0' + num);
+
+    const getTimeRemaining = () => {
       const dateStop = new Date(deadline).getTime();
       const dateNow = new Date().getTime();
       const timeRemaining = (dateStop - dateNow) / 1000;
@@ -18,9 +20,9 @@ window.addEventListener('DOMContentLoaded', () => {
       const hours = Math.floor(timeRemaining / 60 / 60);
 
       return { timeRemaining, hours, minutes, seconds };
-    }
+    };
 
-    function updateClock() {
+    const updateClock = () => {
       const timer = getTimeRemaining();
 
       if (timer.timeRemaining <= 0) {
@@ -30,11 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
         timerMinutes.textContent = formatTime(timer.minutes);
         timerSeconds.textContent = formatTime(timer.seconds);
       }
-    }
-
-    function formatTime(num) {
-      return num >= 10 ? num : '0' + num;
-    }
+    };
 
     updateClock();
     const timerId = setInterval(updateClock, 1000);
@@ -246,9 +244,75 @@ window.addEventListener('DOMContentLoaded', () => {
     addDots();
   };
 
+  // * Command
+  const command = () => {
+    const command = document.getElementById('command');
+    let originalImg;
+
+    command.addEventListener('mouseover', (event) => {
+      if (event.target.matches('.command__photo')) {
+        originalImg = event.target.src;
+        event.target.src = event.target.dataset.img;
+      } else {
+        return;
+      }
+    });
+
+    command.addEventListener('mouseout', (event) => {
+      if (event.target.matches('.command__photo')) {
+        event.target.src = originalImg;
+      } else {
+        return;
+      }
+    });
+  };
+
+  // * Validation
+  const validate = () => {
+    const inputs = document.querySelectorAll('input');
+
+    inputs.forEach((item) => {
+      item.addEventListener('input', (event) => {
+        const target = event.target;
+        const targetName = target.name;
+        const targetValue = target.value;
+
+        if (target.matches('.calc-item')) {
+          target.value = targetValue.replace(/\D/, '');
+        } else if (targetName === 'user_name' || targetName === 'user_message') {
+          target.value = targetValue.replace(/[^а-яё\- ]/i, '');
+        } else if (targetName === 'user_email') {
+          target.value = targetValue.replace(/[^a-z@\-_.!~*']/i, '');
+        } else if (targetName === 'user_phone') {
+          target.value = targetValue.replace(/[^\d()-]/, '');
+        } else {
+          return;
+        }
+      });
+
+      item.addEventListener('blur', (event) => {
+        const target = event.target;
+        const targetName = target.name;
+        let targetValue = target.value;
+
+        targetValue = targetValue.replace(/^(\s|-)*|(\s|-)*$/g, '');
+        targetValue = targetValue.replace(/\s+/g, ' ');
+        targetValue = targetValue.replace(/-+/g, '-');
+
+        if (targetName === 'user_name') {
+          targetValue = targetValue.toLowerCase().replace(/(\s|^)\S/g, (match) => match.toUpperCase());
+        }
+
+        target.value = targetValue;
+      });
+    });
+  };
+
   countTimer('2 march 2021');
   toggleMenu();
   togglePopUp();
   tabs();
   slider();
+  command();
+  validate();
 });
