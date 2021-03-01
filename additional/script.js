@@ -4,22 +4,22 @@ const body = document.body;
 const color = document.getElementById('color');
 const change = document.getElementById('change');
 
-const randomColor = (times) => {
-  if (!times) {
-    return '';
-  } else {
-    let num = Math.floor(Math.random() * 256).toString(16);
+const randomColor = () => {
+  let numColor = '';
 
+  do {
+    let num = Math.floor(Math.random() * 256).toString(16);
     if (num.length === 1) {
       num += num;
     }
+    numColor += num;
+  } while (numColor.length < 6);
 
-    return num + randomColor(times - 1);
-  }
+  return numColor;
 };
 
 const setColor = () => {
-  const colorNum = randomColor(3);
+  const colorNum = randomColor();
 
   color.textContent = '#' + colorNum;
   body.style.backgroundColor = '#' + colorNum;
