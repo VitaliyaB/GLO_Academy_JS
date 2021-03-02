@@ -27,7 +27,7 @@ DomElement.prototype.createElement = function() {
                            background: ${this.bg};
                            font-size: ${this.fontSize};
                            position: absolute;
-                           top: 7px;
+                           top: 0px;
                            left: 0px;`;
 
   newElem.textContent = 'Created new block with text';
