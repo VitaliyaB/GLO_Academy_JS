@@ -62,6 +62,7 @@ AppData.prototype.enableStartBtn =  function() {
 };
 
 AppData.prototype.start = function() {
+  console.log(this);
   if (!this.isNumber(salaryAmount.value)) {
     alert('Ошибка, поле "Месячный доход" должно содержать только цифры!');
     return;
