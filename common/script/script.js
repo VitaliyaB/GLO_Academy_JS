@@ -284,8 +284,11 @@ window.addEventListener('DOMContentLoaded', () => {
           case (target.matches('.calc-item')):
             targetValue = targetValue.replace(/\D/, '');
             break;
-          case ((targetName === 'user_name' || targetName === 'user_message')):
-            targetValue = targetValue.replace(/[^а-яё\-\s]/i, '');
+          case (targetName === 'user_name'):
+            targetValue = targetValue.replace(/[^а-яё\s]/i, '');
+            break;
+          case (targetName === 'user_message'):
+            targetValue = targetValue.replace(/[^а-яё\s\W0-9]|(\W)(?=\1)/i, '');
             break;
           case (targetName === 'user_email'):
             // * check first character, for valid characters and for double special characters
@@ -439,30 +442,12 @@ window.addEventListener('DOMContentLoaded', () => {
     const errorMessage = 'Что-то пошло не так...';
     const loadMessage = 'Загрузка...';
     const successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
-    const form = document.getElementById('form1');
+    const mainForm = document.getElementById('form1');
+    const footerForm = document.getElementById('form2');
+    const popUpForm = document.getElementById('form3');
     const statusMessage = document.createElement('div');
 
-    statusMessage.style.cssText = 'font-size: 2rem;';
-
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      form.appendChild(statusMessage);
-      statusMessage.textContent = loadMessage;
-
-      const formData = new FormData(form);
-      const body = {};
-
-      for (const val of formData.entries()) {
-        body[val[0]] = val[1];
-      }
-
-      postData(body, () => {
-        statusMessage.textContent = successMessage;
-      }, (error) => {
-        console.error(error);
-        statusMessage.textContent = errorMessage;
-      });
-    });
+    statusMessage.style.cssText = 'font-size: 2rem; color: white; margin-top: 1em;';
 
     const postData = (body, outputData, errorData) => {
       const request = new XMLHttpRequest();
@@ -483,9 +468,39 @@ window.addEventListener('DOMContentLoaded', () => {
       request.setRequestHeader('Content-Type', 'application/json');
       request.send(JSON.stringify(body));
     };
+
+    const submitForm = (event) => {
+      event.preventDefault();
+      event.target.appendChild(statusMessage);
+      statusMessage.textContent = loadMessage;
+
+      const formData = new FormData(event.target);
+      const body = {};
+
+      for (const val of formData.entries()) {
+        body[val[0]] = val[1];
+      }
+
+      postData(body, () => {
+        const inputs = document.querySelectorAll('input');
+
+        statusMessage.textContent = successMessage;
+        inputs.forEach((item) => {
+          item.value = '';
+        });
+
+      }, (error) => {
+        console.error(error);
+        statusMessage.textContent = errorMessage;
+      });
+    };
+
+    mainForm.addEventListener('submit', submitForm);
+    footerForm.addEventListener('submit', submitForm);
+    popUpForm.addEventListener('submit', submitForm);
   };
 
-  countTimer('10 march 2021');
+  countTimer('13 march 2021');
   toggleMenu();
   togglePopUp();
   tabs();
