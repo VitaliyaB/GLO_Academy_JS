@@ -115,7 +115,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar toggleMenu = function toggleMenu() {\n  var btnMenu = document.querySelector('.menu');\n  var menu = document.querySelector('menu');\n\n  var handlerMenu = function handlerMenu() {\n    menu.classList.toggle('active-menu');\n  };\n\n  menu.addEventListener('click', function (event) {\n    var target = event.target;\n\n    if (target.classList.contains('close-btn') || target.matches('menu a')) {\n      handlerMenu();\n    }\n  });\n  btnMenu.addEventListener('click', handlerMenu);\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (toggleMenu);\n\n//# sourceURL=webpack://3dglo/./src/modules/toggleMenu.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar toggleMenu = function toggleMenu() {\n  var body = document.querySelector('body');\n  var menu = document.querySelector('menu');\n\n  var handlerMenu = function handlerMenu(event) {\n    var target = event.target;\n    console.log('handlerMenu ~ target', target);\n\n    if (target.closest('.menu') || target.classList.contains('close-btn') || target.matches('menu a') || !target.closest('.active-menu')) {\n      menu.classList.toggle('active-menu');\n    }\n  };\n\n  body.addEventListener('click', handlerMenu);\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (toggleMenu);\n\n//# sourceURL=webpack://3dglo/./src/modules/toggleMenu.js?");
 
 /***/ }),
 
@@ -539,7 +539,7 @@ eval("var map = {\n\t\"./log\": \"./node_modules/webpack/hot/log.js\"\n};\n\n\nf
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("26903c540e5f3e71ee8f")
+/******/ 		__webpack_require__.h = () => ("36a96740d9f7932e284b")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
