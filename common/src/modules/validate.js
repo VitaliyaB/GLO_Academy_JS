@@ -2,6 +2,10 @@ const validate = () => {
   const inputs = document.querySelectorAll('input');
 
   inputs.forEach((item) => {
+    if (item.classList.contains('form-email')) {
+      item.required = true;
+    }
+
     item.addEventListener('input', (event) => {
       const target = event.target;
       const targetName = target.name;
