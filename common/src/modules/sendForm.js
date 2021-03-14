@@ -9,10 +9,9 @@ const sendForm = () => {
 
   statusMessage.style.cssText = 'font-size: 2rem; color: white; margin-top: 1em;';
 
-  const postData = (body) => fetch('./server.php', {
+  const postData = (formData) => fetch('./server.php', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body
+    body: formData
   });
 
   const submitForm = (event) => {
