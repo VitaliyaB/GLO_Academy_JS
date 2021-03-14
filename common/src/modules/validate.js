@@ -19,7 +19,7 @@ const validate = () => {
           targetValue = targetValue.replace(/[^а-яё\s]/gi, '');
           break;
         case (targetName === 'user_message'):
-          targetValue = targetValue.replace(/[^а-яё\s\W0-9]|(\W)(?=\1)/gi, '');
+          targetValue = targetValue.replace(/[^а-яё,.?!'":;()-]|(\W)(?=\1)/gi, '');
           break;
         case (targetName === 'user_email'):
           // * check first character, for valid characters and for double special characters
