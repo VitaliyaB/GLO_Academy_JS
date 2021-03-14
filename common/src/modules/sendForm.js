@@ -16,28 +16,74 @@ const sendForm = () => {
 
   const submitForm = (event) => {
     event.preventDefault();
-    event.target.appendChild(statusMessage);
-    statusMessage.textContent = loadMessage;
 
-    const formData = new FormData(event.target);
+    const target = event.target;
+    const inputs = target.querySelectorAll('input');
+    let validEmail = false;
+    let validPhone = false;
 
-    postData(formData)
-      .then((response) => {
-        if (response.status !== 200) {
-          throw new Error('status network not 200');
+    inputs.forEach((item) => {
+      if (item.classList.contains('form-phone')) {
+        const phoneReg = /^(\+7|8)(\d{10}|(-+?\d{3}-+?(\d{3}-+?\d{2}-+?\d{2}|\d{7})|(\(+?\d{3}\)+?(\d{3}-+?\d{2}-+?\d{2}|\d{7}))))$/g;
+        if (phoneReg.test(item.value)) {
+          validPhone = true;
+        } else {
+          const errorFormMessage = document.createElement('div');
+          errorFormMessage.textContent = 'Введите корректный номер телефона';
+          errorFormMessage.style.cssText = 'font-size: 1.3rem;  color: red;';
+          item.style.border = '2px solid red';
+
+          if (target.classList.contains('main-form')) {
+            errorFormMessage.style.transform = 'translateY(-3rem)';
+          }
+
+          item.after(errorFormMessage);
         }
+      }
 
-        const inputs = document.querySelectorAll('input');
+      if (item.classList.contains('form-email')) {
+        const emailReg = /([a-z@\-_.!~*])+(@)([a-z.-])+((\.)([a-z]){2,})$/;
+        if (emailReg.test(item.value)) {
+          validEmail = true;
+        } else {
+          const errorFormMessage = document.createElement('div');
+          errorFormMessage.textContent = 'Введите корректный email';
+          errorFormMessage.style.cssText = 'font-size: 1.3rem;  color: red;';
+          item.style.border = '2px solid red';
 
-        statusMessage.textContent = successMessage;
-        inputs.forEach((item) => {
-          item.value = '';
+          if (target.classList.contains('main-form')) {
+            errorFormMessage.style.transform = 'translateY(-3rem)';
+          }
+
+          item.after(errorFormMessage);
+        }
+      }
+    });
+
+    if (validPhone && validEmail) {
+      event.target.appendChild(statusMessage);
+      statusMessage.textContent = loadMessage;
+
+      const formData = new FormData(event.target);
+
+      postData(formData)
+        .then((response) => {
+          if (response.status !== 200) {
+            throw new Error('status network not 200');
+          }
+
+          const inputs = document.querySelectorAll('input');
+
+          statusMessage.textContent = successMessage;
+          inputs.forEach((item) => {
+            item.value = '';
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+          statusMessage.textContent = errorMessage;
         });
-      })
-      .catch((err) => {
-        console.error(err);
-        statusMessage.textContent = errorMessage;
-      });
+    }
   };
 
   mainForm.addEventListener('submit', submitForm);

@@ -2,10 +2,6 @@ const validate = () => {
   const inputs = document.querySelectorAll('input');
 
   inputs.forEach((item) => {
-    if (item.classList.contains('form-email')) {
-      item.required = true;
-    }
-
     item.addEventListener('input', (event) => {
       const target = event.target;
       const targetName = target.name;
@@ -19,7 +15,7 @@ const validate = () => {
           targetValue = targetValue.replace(/[^а-яё\s]/gi, '');
           break;
         case (targetName === 'user_message'):
-          targetValue = targetValue.replace(/[^а-яё,.?!'":;()-]|(\W)(?=\1)/gi, '');
+          targetValue = targetValue.replace(/[^а-яё,.?!'":;()-\s]|(\W)(?=\1)/gi, '');
           break;
         case (targetName === 'user_email'):
           // * check first character, for valid characters and for double special characters
@@ -87,7 +83,6 @@ const validate = () => {
       const target = event.target;
       const targetName = target.name;
       let targetValue = target.value;
-      const emailReg = /([a-z@\-_.!~*])+(@)([a-z.-])+((\.)([a-z]){2,})$/;
       const phoneReg = /^(\+7|8)(\d{10}|(-+?\d{3}-+?(\d{3}-+?\d{2}-+?\d{2}|\d{7})|(\(+?\d{3}\)+?(\d{3}-+?\d{2}-+?\d{2}|\d{7}))))$/g;
 
       // * delete spaces and - from begin, end and double in the middle
