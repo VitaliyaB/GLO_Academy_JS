@@ -1,6 +1,6 @@
 const sendForm = () => {
   const errorMessage = 'Что-то пошло не так...';
-  const loadMessage = 'Загрузка...';
+  const loadMessage = document.createElement('div');
   const successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
   const mainForm = document.getElementById('form1');
   const footerForm = document.getElementById('form2');
@@ -62,7 +62,13 @@ const sendForm = () => {
 
     if (validPhone && validEmail) {
       event.target.appendChild(statusMessage);
-      statusMessage.textContent = loadMessage;
+      loadMessage.classList.add('sk-three-bounce');
+      for (let i = 1; i <= 3; i++) {
+        loadMessage.insertAdjacentHTML('beforeend', `
+          <div class='sk-bounce-${i} sk-child'></div>
+        `);
+      }
+      statusMessage.append(loadMessage);
 
       const formData = new FormData(event.target);
 
