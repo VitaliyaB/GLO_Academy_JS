@@ -35,12 +35,12 @@ const sendForm = () => {
       errorFormMessage.textContent = text;
 
       if (attr === 'user_message') {
-        errorFormMessage.style.cssText = 'font-size: 1.3rem;  color: red; margin-top: -2rem';
+        errorFormMessage.style.cssText = 'font-size: 1.4rem;  color: #ff91f2; margin-top: -2rem';
       } else {
-        errorFormMessage.style.cssText = 'font-size: 1.3rem;  color: red;';
+        errorFormMessage.style.cssText = 'font-size: 1.4rem;  color: #ff91f2;';
       }
 
-      item.style.border = '2px solid red';
+      item.style.border = '2px solid #f15858';
 
       if (target.classList.contains('main-form')) {
         errorFormMessage.style.transform = 'translateY(-3rem)';
