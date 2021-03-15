@@ -17,8 +17,9 @@ task2.innerHTML = newTask2Str;
 
 // * Создать запрос во всем документе найти текст в кавычках и заключить его в теги <mark></mark>
 const body = document.querySelector('body');
+console.log('body', body.innerHTML);
 
-let newBodyStr = body.innerHTML.replace(/["«][а-яё]+\s*\W*[а-яё]*["»]/gi, (match) => `<mark>${match}</mark>`);
+let newBodyStr = body.innerHTML.replace(/["«][а-яё\s\n\r\t,:0-9—<>b/]+[^"]["»]/gi, (match) => `<mark>${match}</mark>`);
 
 // * Замените в документе домены вида http:/(/site.ru на <a href="http://site.ru">site.ru</a>
 // * Ссылки такого вида http://site.ru/aaaa/bbbb.html заменить на <a href="http://site.ru/aaaa/bbbb.html">site.ru</a>
