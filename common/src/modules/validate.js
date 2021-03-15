@@ -5,7 +5,13 @@ const validate = () => {
     item.addEventListener('input', (event) => {
       const target = event.target;
       const targetName = target.name;
+      const inputSibling = target.nextElementSibling;
       let targetValue = target.value;
+
+      target.style.border = 'none';
+      if (inputSibling && inputSibling.classList.contains('err-message')) {
+        inputSibling.remove();
+      }
 
       switch (true) {
         case (target.matches('.calc-item')):
@@ -99,12 +105,6 @@ const validate = () => {
             targetValue = targetValue.replace(/^(\+7|8)(\d{11,})/g, (match, p1, p2) => {
               p2 = p2.slice(0, 10);
               return p1 + p2;
-            });
-            targetValue = targetValue.replace(/(\+?[0-9])(.*)/, (match, p1) => {
-              if (p1 !== '+7' && p1 !== '8') {
-                return '';
-              }
-              return match;
             });
           }
           break;

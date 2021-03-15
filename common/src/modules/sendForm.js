@@ -35,7 +35,7 @@ const sendForm = () => {
       errorFormMessage.textContent = text;
 
       if (attr === 'user_message') {
-      errorFormMessage.style.cssText = 'font-size: 1.3rem;  color: red; margin-top: -2rem';
+        errorFormMessage.style.cssText = 'font-size: 1.3rem;  color: red; margin-top: -2rem';
       } else {
         errorFormMessage.style.cssText = 'font-size: 1.3rem;  color: red;';
       }
@@ -67,7 +67,7 @@ const sendForm = () => {
         if (phoneReg.test(item.value)) {
           validPhone = true;
         } else {
-          errorNotify('Введите корректный номер телефона', item, attrName);
+          errorNotify('Введите телефон в формате +7(123)123-45-67 или 8(123)123-45-67', item, attrName);
         }
       }
 
@@ -76,7 +76,7 @@ const sendForm = () => {
         if (emailReg.test(item.value)) {
           validEmail = true;
         } else {
-          errorNotify('Введите корректный email', item, attrName);
+          errorNotify('Введите email в формате test@test.by', item, attrName);
         }
       }
 
@@ -89,7 +89,8 @@ const sendForm = () => {
       }
     });
 
-    if (validPhone && validEmail && validMessage && validName) {
+    if ((target.classList.contains('footer-form') && validPhone && validEmail && validMessage && validName) ||
+      (!target.classList.contains('footer-form') && validPhone && validEmail && validName)) {
       event.target.appendChild(statusMessage);
       statusMessage.textContent = loadMessage;
 
@@ -107,6 +108,14 @@ const sendForm = () => {
           inputs.forEach((item) => {
             item.value = '';
           });
+
+          setTimeout(() => {
+            statusMessage.remove();
+
+            if (target.id === 'form3') {
+              target.closest('.popup').style.display = 'none';
+            }
+          }, 3000);
         })
         .catch((err) => {
           console.error(err);
