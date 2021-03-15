@@ -19,48 +19,77 @@ const sendForm = () => {
 
     const target = event.target;
     const inputs = target.querySelectorAll('input');
+    let validName = false;
     let validEmail = false;
     let validPhone = false;
+    let validMessage = false;
+    const errMessageElem = document.querySelectorAll('.err-message');
+
+    errMessageElem.forEach((item) => {
+      item.remove();
+    });
+
+    const errorNotify = (text, item, attr) => {
+      const errorFormMessage = document.createElement('div');
+      errorFormMessage.classList.add('err-message');
+      errorFormMessage.textContent = text;
+
+      if (attr === 'user_message') {
+      errorFormMessage.style.cssText = 'font-size: 1.3rem;  color: red; margin-top: -2rem';
+      } else {
+        errorFormMessage.style.cssText = 'font-size: 1.3rem;  color: red;';
+      }
+
+      item.style.border = '2px solid red';
+
+      if (target.classList.contains('main-form')) {
+        errorFormMessage.style.transform = 'translateY(-3rem)';
+      }
+
+      item.after(errorFormMessage);
+    };
 
     inputs.forEach((item) => {
-      if (item.classList.contains('form-phone')) {
+      item.style.border = 'none';
+
+      const attrName = item.getAttribute('name');
+      if (attrName === 'user_name') {
+        const nameReg = /[а-яё\s]{2,}/gi;
+        if (nameReg.test(item.value)) {
+          validName = true;
+        } else {
+          errorNotify('Поле должно содержать не менее 2 символов', item, attrName);
+        }
+      }
+
+      if (attrName === 'user_phone') {
         const phoneReg = /^(\+7|8)(\d{10}|(-+?\d{3}-+?(\d{3}-+?\d{2}-+?\d{2}|\d{7})|(\(+?\d{3}\)+?(\d{3}-+?\d{2}-+?\d{2}|\d{7}))))$/g;
         if (phoneReg.test(item.value)) {
           validPhone = true;
         } else {
-          const errorFormMessage = document.createElement('div');
-          errorFormMessage.textContent = 'Введите корректный номер телефона';
-          errorFormMessage.style.cssText = 'font-size: 1.3rem;  color: red;';
-          item.style.border = '2px solid red';
-
-          if (target.classList.contains('main-form')) {
-            errorFormMessage.style.transform = 'translateY(-3rem)';
-          }
-
-          item.after(errorFormMessage);
+          errorNotify('Введите корректный номер телефона', item, attrName);
         }
       }
 
-      if (item.classList.contains('form-email')) {
-        const emailReg = /([a-z@\-_.!~*])+(@)([a-z.-])+((\.)([a-z]){2,})$/;
+      if (attrName === 'user_email') {
+        const emailReg = /([a-z@\-_.!~*])+(@)([a-z.-])+((\.)([a-z]){2,})$/gi;
         if (emailReg.test(item.value)) {
           validEmail = true;
         } else {
-          const errorFormMessage = document.createElement('div');
-          errorFormMessage.textContent = 'Введите корректный email';
-          errorFormMessage.style.cssText = 'font-size: 1.3rem;  color: red;';
-          item.style.border = '2px solid red';
+          errorNotify('Введите корректный email', item, attrName);
+        }
+      }
 
-          if (target.classList.contains('main-form')) {
-            errorFormMessage.style.transform = 'translateY(-3rem)';
-          }
-
-          item.after(errorFormMessage);
+      if (attrName === 'user_message') {
+        if (item.value) {
+          validMessage = true;
+        } else {
+          errorNotify('Поле должно быть заполнено', item, attrName);
         }
       }
     });
 
-    if (validPhone && validEmail) {
+    if (validPhone && validEmail && validMessage && validName) {
       event.target.appendChild(statusMessage);
       statusMessage.textContent = loadMessage;
 
