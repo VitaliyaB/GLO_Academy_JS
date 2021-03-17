@@ -85,7 +85,7 @@ class AppData {
 
     this.budget = parseFloat(salaryAmount.value.trim());
 
-    if (this.getIncome() && this.getExpenses() && this.getInfoDeposit()) {
+    if (this.getExpInc() && this.getInfoDeposit()) {
       dataInputsText.forEach((item) => {
         item.disabled = 'disabled';
       });
@@ -100,10 +100,8 @@ class AppData {
       start.style.display = 'none';
       cancel.style.display = 'block';
 
-      this.getAddIncome();
-      this.getIncomeMonth();
-      this.getAddExpenses();
-      this.getExpensesMonth();
+      this.getAddExpInc();
+      this.getExpIncMonth();
       this.getBudget();
       this.showResult();
     }
@@ -121,138 +119,107 @@ class AppData {
     periodSelect.addEventListener('input', this.changeIncomePeriod.bind(this));
   }
 
-  addExpensesBlock() {
-    const cloneExpensesItem = expensesItems[0].cloneNode(true);
+  addExpIncBlock(event) {
+    const target = event.target;
 
-    cloneExpensesItem.querySelector('.expenses-title').value = '';
-    cloneExpensesItem.querySelector('.expenses-amount').value = '';
+    const addBlock = (items) => {
+      const cloneItem = items[0].cloneNode(true);
+      const startStr = target.className.split(/[_\s]/)[2];
 
-    expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
-    expensesItems = document.querySelectorAll('.expenses-items');
-    dataInputsText = dataForm.querySelectorAll('[type="text"]');
+      cloneItem.querySelector(`.${startStr}-title`).value = '';
+      cloneItem.querySelector(`.${startStr}-amount`).value = '';
 
-    if (expensesItems.length === 3) {
-      expensesPlus.style.display = 'none';
+      items[0].parentNode.insertBefore(cloneItem, target);
+      items = document.querySelectorAll(`.${startStr}-items`);
+      dataInputsText = dataForm.querySelectorAll('[type="text"]');
+
+      if (items.length === 3) {
+        target.style.display = 'none';
+      }
+    };
+
+    if (target.classList.contains('income_add')) {
+      addBlock(incomeItems);
+    }
+
+    if (target.classList.contains('expenses_add')) {
+      addBlock(expensesItems);
     }
   }
 
-  getExpenses() {
+  getExpInc = () => {
     let checkResult = true;
-    expensesItems.forEach((item) => {
-      const itemExpenses = item.querySelector('.expenses-title').value.trim();
-      const cashExpenses = item.querySelector('.expenses-amount').value.trim();
+    const count = (item) => {
+      const startStr = item.className.split('-')[0];
+      const itemTitle = item.querySelector(`.${startStr}-title`).value.trim();
+      const itemAmount = item.querySelector(`.${startStr}-amount`).value.trim();
+      const sectionName = document.querySelector(`.${startStr}-title.title`).textContent;
 
-      if (this.isNumber(itemExpenses) && itemExpenses !== '') {
-        alert('Ошибка, в разделе "Обязательные расходы" поле наименование не должно содержать только цифры!');
+      if (this.isNumber(itemTitle) && itemTitle !== '') {
+        alert(`Ошибка, в разделе ${sectionName} поле наименование не должно содержать только цифры!`);
         checkResult = false;
         return;
       }
 
-      if (!this.isNumber(cashExpenses) && cashExpenses !== '') {
-        alert('Ошибка, в разделе "Обязательные расходы" поле сумма должно содержать только цифры!');
+      if (!this.isNumber(itemAmount) && itemAmount !== '') {
+        alert(`Ошибка, в разделе ${sectionName} поле сумма должно содержать только цифры!`);
         checkResult = false;
         return;
       }
 
-      if (itemExpenses && !cashExpenses) {
-        alert('Ошибка, в разделе "Обязательные расходы" поле сумма не должно быть пустым');
+      if (itemTitle && !itemTitle) {
+        alert(`Ошибка, в разделе ${sectionName} поле сумма не должно быть пустым`);
         checkResult = false;
         return;
       }
 
-      if (!itemExpenses && cashExpenses) {
-        alert('Ошибка, в разделе "Обязательные расходы" поле наименование не должно быть пустым');
+      if (!itemTitle && itemAmount) {
+        alert(`Ошибка, в разделе ${sectionName} поле наименование не должно быть пустым`);
         checkResult = false;
         return;
       }
 
-      this.expenses[itemExpenses] = cashExpenses;
-    });
+      this[startStr][itemTitle] = itemAmount;
+    }
+
+    expensesItems.forEach(count);
+    incomeItems.forEach(count);
 
     return checkResult;
   }
 
-  addIncomeBlock() {
-    const cloneIncomeItem = incomeItems[0].cloneNode(true);
+  getAddExpInc = () => {
+    const createAdd = (item) => {
+      if (item.className) {
+        item = item.value.trim();
 
-    cloneIncomeItem.querySelector('.income-title').value = '';
-    cloneIncomeItem.querySelector('.income-amount').value = '';
+        if (item !== '') {
+          this.addIncome.push(item);
+        }
+      } else {
+        item = item.trim();
 
-    incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
-    incomeItems = document.querySelectorAll('.income-items');
-    dataInputsText = dataForm.querySelectorAll('[type="text"]');
+        if (item !== '') {
+          this.addExpenses.push(item);
+        }
+      }
+    };
 
-    if (incomeItems.length === 3) {
-      incomePlus.style.display = 'none';
-    }
+    additionalIncomeItem.forEach(createAdd);
+    additionalExpensesItem.value.split(',').forEach(createAdd);
   }
 
-  getIncome() {
-    let checkResult = true;
-    incomeItems.forEach((item) => {
-      const itemIncome = item.querySelector('.income-title').value.trim();
-      const cashIncome = item.querySelector('.income-amount').value.trim();
-
-      if (this.isNumber(itemIncome) && itemIncome !== '') {
-        alert('Ошибка, в разделе "Дополнительный доход" поле наименование не должно содержать только цифры!');
-        checkResult = false;
-        return;
+  getExpIncMonth() {
+    const count = (allItems, monthCount) => {
+      for (let key in allItems) {
+        monthCount += +allItems[key];
       }
 
-      if (!this.isNumber(cashIncome) && cashIncome !== '') {
-        alert('Ошибка, в разделе "Дополнительный доход" поле сумма должно содержать только цифры!');
-        checkResult = false;
-        return;
-      }
+      return monthCount;
+    };
 
-      if (itemIncome && !cashIncome) {
-        alert('Ошибка, в разделе "Дополнительный доход" поле сумма не должно быть пустым');
-        checkResult = false;
-        return;
-      }
-
-      if (!itemIncome && cashIncome) {
-        alert('Ошибка, в разделе "Дополнительный доход" поле наименование не должно быть пустым');
-        checkResult = false;
-        return;
-      }
-
-      this.income[itemIncome] = cashIncome;
-    });
-
-    return checkResult;
-  }
-
-  getAddExpenses() {
-    const addExpenses = additionalExpensesItem.value.split(',');
-    addExpenses.forEach((item) => {
-      item = item.trim();
-      if(item !== '') {
-        this.addExpenses.push(item);
-      }
-    });
-  }
-
-  getAddIncome() {
-    additionalIncomeItem.forEach((item) => {
-      const itemValue = item.value.trim();
-
-      if (itemValue !== '') {
-        this.addIncome.push(itemValue);
-      }
-    });
-  }
-
-  getExpensesMonth() {
-    for (let key in this.expenses) {
-      this.expensesMonth += +this.expenses[key];
-    }
-  }
-
-  getIncomeMonth() {
-    for (let key in this.income) {
-      this.incomeMonth += +this.income[key];
-    }
+    this.expensesMonth = count(this.expenses, this.expensesMonth);
+    this.incomeMonth = count(this.income, this.incomeMonth);
   }
 
   getBudget() {
@@ -429,8 +396,8 @@ class AppData {
     salaryAmount.addEventListener('input', this.enableStartBtn);
     start.addEventListener('click', this.start.bind(this));
     cancel.addEventListener('click', this.reset.bind(this));
-    incomePlus.addEventListener('click', this.addIncomeBlock);
-    expensesPlus.addEventListener('click', this.addExpensesBlock);
+    incomePlus.addEventListener('click', this.addExpIncBlock);
+    expensesPlus.addEventListener('click', this.addExpIncBlock);
     periodSelect.addEventListener('input', this.getPeriod);
     depositCheck.addEventListener('change', this.depositHandler.bind(this));
   }
