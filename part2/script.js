@@ -1,37 +1,10 @@
 'use strict';
 
-const calculator = {
-  a: document.getElementById('a'),
-  b: document.getElementById('b'),
+function getResult(x, y) {
+  const pow = x ** y;
+  const powArr = pow.toString().split('');
 
-  sum() {
-    if (this.a.value && this.b.value) {
-      return +this.a.value + +this.b.value;
-    }
-  },
+  return powArr.reduce((acc, item) => acc + +item, 0);
+}
 
-  mult() {
-    if (this.a.value && this.b.value) {
-      return +this.a.value * +this.b.value;
-    }
-  },
-
-  show(e) {
-    if (e.target.id === 'sum') {
-      return this.sum();
-    }
-
-    if (e.target.id === 'mult') {
-      return this.mult();
-    }
-  }
-};
-
-const btn = document.querySelectorAll('button');
-const res = document.getElementById('res');
-
-btn.forEach((item) => {
-  item.addEventListener('click', (e) => {
-    res.value = calculator.show(e);
-  });
-});
+console.log(getResult(4, 8));
