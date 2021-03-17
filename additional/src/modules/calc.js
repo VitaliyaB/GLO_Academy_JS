@@ -8,6 +8,7 @@ const calc = (price = 100) => {
   let countSumTotal = 0;
   let step = 1;
   const animationTime = 2000;
+  let timerId;
 
   const countSum = () => {
     let total = 0;
@@ -15,9 +16,11 @@ const calc = (price = 100) => {
     let dayValue = 1;
     const typeValue = calcType.options[calcType.selectedIndex].value;
     const squareValue = +calcSquare.value;
+    clearInterval(timerId);
+    totalValue.textContent = total;
 
     if (calcCount.value > 1) {
-      countValue += Math.ceil((calcCount.value - 1) / 10);
+      countValue += (calcCount.value - 1) / 10;
     }
 
     if (calcDay.value && calcDay.value < 5) {
@@ -45,17 +48,14 @@ const calc = (price = 100) => {
       if (total > 0) {
         countSumTotal += step;
         totalValue.textContent = countSumTotal;
+      }
 
-        if (countSumTotal >= total) {
-          countSumTotal = 0;
-          clearInterval(timerId);
-        }
-      } else {
+      if (countSumTotal >= total || total <= 0) {
         clearInterval(timerId);
       }
     };
 
-    const timerId = setInterval(setTotal, time);
+    timerId = setInterval(setTotal, time);
   };
 
   calcBlock.addEventListener('change', (event) => {
