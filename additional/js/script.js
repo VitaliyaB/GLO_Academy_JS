@@ -26,8 +26,9 @@ class Todo {
     li.classList.add('todo-item');
     li.key = todo.key;
     li.insertAdjacentHTML('beforeend', `
-      <span class="text-todo">${todo.value}</span>
+      <div class="text-todo">${todo.value}</div>
       <div class="todo-buttons">
+        <button class="todo-edit"></button>
         <button class="todo-remove"></button>
         <button class="todo-complete"></button>
       </div>
@@ -64,6 +65,7 @@ class Todo {
   }
 
   deleteItem(item) {
+
     this.todoData.delete(item);
     this.render();
   }
@@ -78,15 +80,40 @@ class Todo {
     this.render();
   }
 
+  editItem(itemKey, item) {
+    const editableText = item.querySelector('.text-todo');
+    const prevValText = editableText.textContent;
+
+    editableText.style.width = '75%';
+    editableText.contentEditable = true;
+    editableText.focus();
+
+    editableText.addEventListener('blur', (event) => {
+      const target = event.target;
+      const curValText = target.textContent;
+
+      if (curValText !== prevValText) {
+        for (const [key, value] of this.todoData) {
+          if (itemKey === key) {
+            value.value = curValText;
+          }
+        }
+
+        this.render();
+      }
+    });
+  }
+
   handler(event) {
-    let target = event.target;
+    const target = event.target;
+    const parentTarget = target.closest('.todo-item');
 
     if (target.matches('.todo-remove')) {
-      target = target.closest('.todo-item');
-      this.deleteItem(target.key);
+      this.deleteItem(parentTarget.key);
     } else if (target.matches('.todo-complete')) {
-      target = target.closest('.todo-item');
-      this.completedItem(target.key);
+      this.completedItem(parentTarget.key);
+    } else if (target.matches('.todo-edit')) {
+      this.editItem(parentTarget.key, parentTarget);
     } else {
       return;
     }
