@@ -25,6 +25,7 @@ class Todo {
     const li = document.createElement('li');
     li.classList.add('todo-item');
     li.key = todo.key;
+    li.style.opacity = todo.opacity;
     li.insertAdjacentHTML('beforeend', `
       <div class="text-todo">${todo.value}</div>
       <div class="todo-buttons">
@@ -36,8 +37,24 @@ class Todo {
 
     if (todo.completed) {
       this.todoCompleted.append(li);
+      if (todo.opacity === '0') {
+        this.fadeIn(li);
+        for (const [key, value] of this.todoData) {
+          if (key === todo.key) {
+            value.opacity = '1';
+          }
+        }
+      }
     } else {
       this.todoList.append(li);
+      if (todo.opacity === '0') {
+        this.fadeIn(li);
+        for (const [key, value] of this.todoData) {
+          if (key === todo.key) {
+            value.opacity = '1';
+          }
+        }
+      }
     }
 
     this.input.value = '';
@@ -50,7 +67,8 @@ class Todo {
       const newTodo = {
         value: this.input.value,
         completed: false,
-        key: this.generateKey()
+        key: this.generateKey(),
+        opacity: '1'
       };
 
       this.todoData.set(newTodo.key, newTodo);
@@ -64,20 +82,60 @@ class Todo {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
 
-  deleteItem(item) {
+  deleteItem(itemKey, item) {
+    let timerId;
+    let itemOpacity = 1;
 
-    this.todoData.delete(item);
-    this.render();
+    const fadeOutItem = () => {
+      if (itemOpacity > 0.1) {
+        item.style.opacity = `${itemOpacity}`;
+        itemOpacity = +(itemOpacity - 0.1).toFixed(1);
+      } else {
+        clearTimeout(timerId);
+        this.todoData.delete(itemKey);
+        this.render();
+      }
+    };
+
+    timerId = setInterval(fadeOutItem, 50);
   }
 
-  completedItem(item) {
-    for (const [key, value] of this.todoData) {
-      if (key === item) {
-        value.completed = !value.completed;
-      }
-    }
+  completedItem(itemKey, item) {
+    let timerId;
+    let itemOpacity = 1;
 
-    this.render();
+    timerId = setInterval(() => {
+      if (itemOpacity > 0.1) {
+        item.style.opacity = `${itemOpacity}`;
+        itemOpacity = +(itemOpacity - 0.1).toFixed(1);
+      } else {
+        clearTimeout(timerId);
+        item.style.opacity = '0';
+
+        for (const [key, value] of this.todoData) {
+          if (key === itemKey) {
+            value.completed = !value.completed;
+            value.opacity = '0';
+          }
+        }
+        this.render();
+      }
+    }, 50);
+  }
+
+  fadeIn(item) {
+    let timerId;
+    let itemOpacity = 0;
+
+    timerId = setInterval(() => {
+      if (itemOpacity < 1) {
+        item.style.opacity = `${itemOpacity}`;
+        itemOpacity = +(itemOpacity + 0.1).toFixed(1);
+      } else {
+        clearTimeout(timerId);
+        item.style.opacity = '1';
+      }
+    }, 50);
   }
 
   editItem(itemKey, item) {
@@ -109,9 +167,9 @@ class Todo {
     const parentTarget = target.closest('.todo-item');
 
     if (target.matches('.todo-remove')) {
-      this.deleteItem(parentTarget.key);
+      this.deleteItem(parentTarget.key, parentTarget);
     } else if (target.matches('.todo-complete')) {
-      this.completedItem(parentTarget.key);
+      this.completedItem(parentTarget.key, parentTarget);
     } else if (target.matches('.todo-edit')) {
       this.editItem(parentTarget.key, parentTarget);
     } else {
