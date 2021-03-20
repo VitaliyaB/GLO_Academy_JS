@@ -8,6 +8,42 @@
 	<title>Document</title>
 </head>
 <body>
+	<div class="wrapper">
+		<form id="convert" name="convert">
+			<div class="select-currency">
+				<label for="select_cur_from">
+					<span>Покупка</span>
+					<select name="user_cur_from" id="select_cur_from">
+						<option value="RUB">RUB</option>
+						<option value="USD">USD</option>
+						<option value="EUR">EUR</option>
+					</select>
+				</label>
+				<label for="select_cur_to">
+					<span>Продажа</span>
+					<select name="user_cur_to" id="select_cur_to">
+						<option value="USD">USD</option>
+						<option value="EUR">EUR</option>
+					</select>
+				</label>
+			</div>
+			<div class="rate">
+				<span>Курс:</span>
+				<span id="rate"></span></div>
+			<div class="user-input">
+				<div id="error"></div>
+				<label for="convert_from">
+					<input type="text" name="user_currency" id="convert_from">
+					<span>Российский рубль (RUB)</span>
+				</label>
+				<label for="convert_to">
+					<input type="text" name="result_currency" id="convert_to" disabled>
+					<span>Доллары США (USD)</span>
+			</label>
+			</div>
+			<button type="submit" id="convert_button">Конвертировать</button>
+		</form>
+	</div>
 	<script src="scripts.js"></script>
 </body>
 </html>
