@@ -35,9 +35,120 @@ eval("\nmodule.exports = function () {\n\treturn /[\\u001b\\u009b][[()#;?]*(?:[0
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("\n\n//# sourceURL=webpack://relax-live/./src/index.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_toggleMenu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/toggleMenu */ \"./src/modules/toggleMenu.js\");\n/* harmony import */ var _modules_togglePhones__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/togglePhones */ \"./src/modules/togglePhones.js\");\n/* harmony import */ var _modules_scrollPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/scrollPage */ \"./src/modules/scrollPage.js\");\n/* harmony import */ var _modules_togglePopUps__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/togglePopUps */ \"./src/modules/togglePopUps.js\");\n/* harmony import */ var _modules_validate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/validate */ \"./src/modules/validate.js\");\n/* harmony import */ var _modules_sendForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/sendForm */ \"./src/modules/sendForm.js\");\n/* harmony import */ var _modules_showHint__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/showHint */ \"./src/modules/showHint.js\");\n/* harmony import */ var _modules_sliders__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/sliders */ \"./src/modules/sliders.js\");\n/* harmony import */ var _modules_popUpSlider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/popUpSlider */ \"./src/modules/popUpSlider.js\");\n/* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/tabs */ \"./src/modules/tabs.js\");\n\n\n\n\n\n\n\n\n\n\n(0,_modules_toggleMenu__WEBPACK_IMPORTED_MODULE_0__.default)();\n(0,_modules_togglePhones__WEBPACK_IMPORTED_MODULE_1__.default)();\n(0,_modules_scrollPage__WEBPACK_IMPORTED_MODULE_2__.default)();\n(0,_modules_togglePopUps__WEBPACK_IMPORTED_MODULE_3__.default)();\n(0,_modules_validate__WEBPACK_IMPORTED_MODULE_4__.default)();\n(0,_modules_sendForm__WEBPACK_IMPORTED_MODULE_5__.default)();\n(0,_modules_showHint__WEBPACK_IMPORTED_MODULE_6__.default)();\n(0,_modules_sliders__WEBPACK_IMPORTED_MODULE_7__.default)();\n(0,_modules_popUpSlider__WEBPACK_IMPORTED_MODULE_8__.default)();\n(0,_modules_tabs__WEBPACK_IMPORTED_MODULE_9__.default)();\n\n//# sourceURL=webpack://relax-live/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modules/popUpSlider.js":
+/*!************************************!*\
+  !*** ./src/modules/popUpSlider.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar popUpSlider = function popUpSlider() {};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (popUpSlider);\n\n//# sourceURL=webpack://relax-live/./src/modules/popUpSlider.js?");
+
+/***/ }),
+
+/***/ "./src/modules/scrollPage.js":
+/*!***********************************!*\
+  !*** ./src/modules/scrollPage.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar scrollPage = function scrollPage() {};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (scrollPage);\n\n//# sourceURL=webpack://relax-live/./src/modules/scrollPage.js?");
+
+/***/ }),
+
+/***/ "./src/modules/sendForm.js":
+/*!*********************************!*\
+  !*** ./src/modules/sendForm.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar sendForm = function sendForm() {};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (sendForm);\n\n//# sourceURL=webpack://relax-live/./src/modules/sendForm.js?");
+
+/***/ }),
+
+/***/ "./src/modules/showHint.js":
+/*!*********************************!*\
+  !*** ./src/modules/showHint.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar showHint = function showHint() {};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (showHint);\n\n//# sourceURL=webpack://relax-live/./src/modules/showHint.js?");
+
+/***/ }),
+
+/***/ "./src/modules/sliders.js":
+/*!********************************!*\
+  !*** ./src/modules/sliders.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar sliders = function sliders() {};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (sliders);\n\n//# sourceURL=webpack://relax-live/./src/modules/sliders.js?");
+
+/***/ }),
+
+/***/ "./src/modules/tabs.js":
+/*!*****************************!*\
+  !*** ./src/modules/tabs.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar tabs = function tabs() {};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (tabs);\n\n//# sourceURL=webpack://relax-live/./src/modules/tabs.js?");
+
+/***/ }),
+
+/***/ "./src/modules/toggleMenu.js":
+/*!***********************************!*\
+  !*** ./src/modules/toggleMenu.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar toggleMenu = function toggleMenu() {};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (toggleMenu);\n\n//# sourceURL=webpack://relax-live/./src/modules/toggleMenu.js?");
+
+/***/ }),
+
+/***/ "./src/modules/togglePhones.js":
+/*!*************************************!*\
+  !*** ./src/modules/togglePhones.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar togglePhones = function togglePhones() {};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (togglePhones);\n\n//# sourceURL=webpack://relax-live/./src/modules/togglePhones.js?");
+
+/***/ }),
+
+/***/ "./src/modules/togglePopUps.js":
+/*!*************************************!*\
+  !*** ./src/modules/togglePopUps.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar togglePopUps = function togglePopUps() {};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (togglePopUps);\n\n//# sourceURL=webpack://relax-live/./src/modules/togglePopUps.js?");
+
+/***/ }),
+
+/***/ "./src/modules/validate.js":
+/*!*********************************!*\
+  !*** ./src/modules/validate.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar validate = function validate() {};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (validate);\n\n//# sourceURL=webpack://relax-live/./src/modules/validate.js?");
 
 /***/ }),
 
@@ -373,6 +484,18 @@ eval("var map = {\n\t\"./log\": \"./node_modules/webpack/hot/log.js\"\n};\n\n\nf
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -388,6 +511,17 @@ eval("var map = {\n\t\"./log\": \"./node_modules/webpack/hot/log.js\"\n};\n\n\nf
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/node module decorator */
