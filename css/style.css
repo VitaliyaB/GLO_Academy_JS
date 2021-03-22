@@ -358,6 +358,7 @@ template, [hidden] {
         -ms-flex-align: end;
         align-items: flex-end;
         top: 0;
+        left: 0;
         -webkit-transition: 0.5s;
         transition: 0.5s; }
         .header-contacts__phone-number-accord a {
