@@ -5,6 +5,7 @@ const toggleMenu = () => {
 
   const handlerMenu = (event) => {
     const target = event.target;
+    console.log("🚀 ~ file: toggleMenu.js ~ line 10 ~ handlerMenu ~ target", target);
 
     if (target.classList.contains('menu__icon')) {
       body.style.overflowY = 'hidden';
@@ -20,7 +21,7 @@ const toggleMenu = () => {
 
     if (target.classList.contains('close-menu') || target.matches('.popup-menu a') ||
     (!target.closest('.popup-dialog-menu') && popupDialogMenu.classList.contains('showMenu') &&
-    !target.classList.contains('menu__icon'))) {
+    !target.classList.contains('menu__icon')) || target.closest('.link-list-menu')) {
       body.style.overflowY = 'unset';
       popupMenu.style.visibility = 'hidden';
       if (document.documentElement.clientWidth >= 575) {

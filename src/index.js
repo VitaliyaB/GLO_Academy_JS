@@ -1,8 +1,8 @@
 import '@styles/style.css';
-import toggleMenu from '@modules/toggleMenu';
 import togglePhones from '@modules/togglePhones';
+import toggleMenu from '@modules/toggleMenu';
 import scrollPage from '@modules/scrollPage';
-import togglePopUps from '@modules/togglePopUps';
+import popUpRepairTypes from '@modules/popUpRepairTypes';
 import validate from '@modules/validate';
 import sendForm from '@modules/sendForm';
 import showHint from '@modules/showHint';
@@ -15,10 +15,10 @@ window.onload = () => {
   body.classList.remove('preload');
 };
 
-toggleMenu();
 togglePhones();
+toggleMenu();
 scrollPage();
-togglePopUps();
+popUpRepairTypes();
 validate();
 sendForm();
 showHint();

@@ -94,7 +94,10 @@ module.exports = {
       },
       {
         test: /\.(ttf|woff|woff2|eot)$/i,
-        use: ['file-loader'],
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]'
+        }
       },
       {
         test: /\.js$/,
