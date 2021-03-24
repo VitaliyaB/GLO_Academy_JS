@@ -10,6 +10,11 @@ import sliders from '@modules/sliders';
 import popUpSlider from '@modules/popUpSlider';
 import tabs from '@modules/tabs';
 
+document.addEventListener('DOMContenteLoaded', () => {
+  const body = document.querySelector('.preload');
+  body.classList.remove('preload');
+});
+
 toggleMenu();
 togglePhones();
 scrollPage();
