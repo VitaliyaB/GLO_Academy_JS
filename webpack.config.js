@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
@@ -59,7 +60,7 @@ module.exports = {
     hot: false,
     writeToDisk: true,
   },
-  devtool: isDev ? 'source-map' : '(none)',
+  devtool: isDev ? 'source-map' : false,
   plugins: [
     new HTMLWebpackPlugin({
       template: './index.html',
@@ -70,6 +71,12 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: filename('css')
+    }),
+    new CopyWebpackPlugin({
+      patterns: [{
+        from: path.resolve(__dirname, 'src/assets/images'),
+        to: path.resolve(__dirname, 'build/assets/images')
+      }]
     })
   ],
   module: {
@@ -87,10 +94,7 @@ module.exports = {
       },
       {
         test: /\.(ttf|woff|woff2|eot)$/i,
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[ext]'
-        }
+        use: ['file-loader'],
       },
       {
         test: /\.js$/,
