@@ -203,6 +203,44 @@ module.exports = function () {
 
 /***/ }),
 
+/***/ "./modules/popUpConsultation.js":
+/*!**************************************!*\
+  !*** ./modules/popUpConsultation.js ***!
+  \**************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return __WEBPACK_DEFAULT_EXPORT__; }
+/* harmony export */ });
+var popUpConsultation = function popUpConsultation() {
+  var consultationBtn = document.querySelectorAll('.button_wide');
+  var popupConsultation = document.querySelector('.popup-consultation');
+  var closeConsultation = document.querySelector('.close-consultation');
+
+  var handlerConsultation = function handlerConsultation(event) {
+    var target = event.target;
+
+    if (target.classList.contains('button_wide')) {
+      popupConsultation.style.visibility = 'visible';
+    }
+
+    if (target.classList.contains('close-consultation')) {
+      popupConsultation.style.visibility = 'hidden';
+    }
+  };
+
+  consultationBtn.forEach(function (item) {
+    item.addEventListener('click', handlerConsultation);
+  });
+  closeConsultation.addEventListener('click', handlerConsultation);
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (popUpConsultation);
+
+/***/ }),
+
 /***/ "./modules/popUpPrivacy.js":
 /*!*********************************!*\
   !*** ./modules/popUpPrivacy.js ***!
@@ -10085,12 +10123,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_scrollPage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @modules/scrollPage */ "./modules/scrollPage.js");
 /* harmony import */ var _modules_popUpRepairTypes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @modules/popUpRepairTypes */ "./modules/popUpRepairTypes.js");
 /* harmony import */ var _modules_popUpPrivacy__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @modules/popUpPrivacy */ "./modules/popUpPrivacy.js");
-/* harmony import */ var _modules_validate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @modules/validate */ "./modules/validate.js");
-/* harmony import */ var _modules_sendForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @modules/sendForm */ "./modules/sendForm.js");
-/* harmony import */ var _modules_showHint__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @modules/showHint */ "./modules/showHint.js");
-/* harmony import */ var _modules_sliders__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @modules/sliders */ "./modules/sliders.js");
-/* harmony import */ var _modules_popUpSlider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @modules/popUpSlider */ "./modules/popUpSlider.js");
-/* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @modules/tabs */ "./modules/tabs.js");
+/* harmony import */ var _modules_popUpConsultation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @modules/popUpConsultation */ "./modules/popUpConsultation.js");
+/* harmony import */ var _modules_validate__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @modules/validate */ "./modules/validate.js");
+/* harmony import */ var _modules_sendForm__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @modules/sendForm */ "./modules/sendForm.js");
+/* harmony import */ var _modules_showHint__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @modules/showHint */ "./modules/showHint.js");
+/* harmony import */ var _modules_sliders__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @modules/sliders */ "./modules/sliders.js");
+/* harmony import */ var _modules_popUpSlider__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @modules/popUpSlider */ "./modules/popUpSlider.js");
+/* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @modules/tabs */ "./modules/tabs.js");
+
 
 
 
@@ -10114,12 +10154,13 @@ window.onload = function () {
 (0,_modules_scrollPage__WEBPACK_IMPORTED_MODULE_3__.default)();
 (0,_modules_popUpRepairTypes__WEBPACK_IMPORTED_MODULE_4__.default)();
 (0,_modules_popUpPrivacy__WEBPACK_IMPORTED_MODULE_5__.default)();
-(0,_modules_validate__WEBPACK_IMPORTED_MODULE_6__.default)();
-(0,_modules_sendForm__WEBPACK_IMPORTED_MODULE_7__.default)();
-(0,_modules_showHint__WEBPACK_IMPORTED_MODULE_8__.default)();
-(0,_modules_sliders__WEBPACK_IMPORTED_MODULE_9__.default)();
-(0,_modules_popUpSlider__WEBPACK_IMPORTED_MODULE_10__.default)();
-(0,_modules_tabs__WEBPACK_IMPORTED_MODULE_11__.default)();
+(0,_modules_popUpConsultation__WEBPACK_IMPORTED_MODULE_6__.default)();
+(0,_modules_validate__WEBPACK_IMPORTED_MODULE_7__.default)();
+(0,_modules_sendForm__WEBPACK_IMPORTED_MODULE_8__.default)();
+(0,_modules_showHint__WEBPACK_IMPORTED_MODULE_9__.default)();
+(0,_modules_sliders__WEBPACK_IMPORTED_MODULE_10__.default)();
+(0,_modules_popUpSlider__WEBPACK_IMPORTED_MODULE_11__.default)();
+(0,_modules_tabs__WEBPACK_IMPORTED_MODULE_12__.default)();
 }();
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 !function() {
