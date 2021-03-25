@@ -203,6 +203,34 @@ module.exports = function () {
 
 /***/ }),
 
+/***/ "./modules/popUpPrivacy.js":
+/*!*********************************!*\
+  !*** ./modules/popUpPrivacy.js ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return __WEBPACK_DEFAULT_EXPORT__; }
+/* harmony export */ });
+var popUpPrivacy = function popUpPrivacy() {
+  var linkPrivacy = document.querySelectorAll('.link-privacy');
+  var popupPrivacy = document.querySelector('.popup-privacy');
+
+  var handlerPrivacy = function handlerPrivacy() {
+    popupPrivacy.style.visibility = 'visible';
+  };
+
+  linkPrivacy.forEach(function (item) {
+    item.addEventListener('click', handlerPrivacy);
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (popUpPrivacy);
+
+/***/ }),
+
 /***/ "./modules/popUpRepairTypes.js":
 /*!*************************************!*\
   !*** ./modules/popUpRepairTypes.js ***!
@@ -10043,12 +10071,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_toggleMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @modules/toggleMenu */ "./modules/toggleMenu.js");
 /* harmony import */ var _modules_scrollPage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @modules/scrollPage */ "./modules/scrollPage.js");
 /* harmony import */ var _modules_popUpRepairTypes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @modules/popUpRepairTypes */ "./modules/popUpRepairTypes.js");
-/* harmony import */ var _modules_validate__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @modules/validate */ "./modules/validate.js");
-/* harmony import */ var _modules_sendForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @modules/sendForm */ "./modules/sendForm.js");
-/* harmony import */ var _modules_showHint__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @modules/showHint */ "./modules/showHint.js");
-/* harmony import */ var _modules_sliders__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @modules/sliders */ "./modules/sliders.js");
-/* harmony import */ var _modules_popUpSlider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @modules/popUpSlider */ "./modules/popUpSlider.js");
-/* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @modules/tabs */ "./modules/tabs.js");
+/* harmony import */ var _modules_popUpPrivacy__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @modules/popUpPrivacy */ "./modules/popUpPrivacy.js");
+/* harmony import */ var _modules_validate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @modules/validate */ "./modules/validate.js");
+/* harmony import */ var _modules_sendForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @modules/sendForm */ "./modules/sendForm.js");
+/* harmony import */ var _modules_showHint__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @modules/showHint */ "./modules/showHint.js");
+/* harmony import */ var _modules_sliders__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @modules/sliders */ "./modules/sliders.js");
+/* harmony import */ var _modules_popUpSlider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @modules/popUpSlider */ "./modules/popUpSlider.js");
+/* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @modules/tabs */ "./modules/tabs.js");
+
 
 
 
@@ -10070,12 +10100,13 @@ window.onload = function () {
 (0,_modules_toggleMenu__WEBPACK_IMPORTED_MODULE_2__.default)();
 (0,_modules_scrollPage__WEBPACK_IMPORTED_MODULE_3__.default)();
 (0,_modules_popUpRepairTypes__WEBPACK_IMPORTED_MODULE_4__.default)();
-(0,_modules_validate__WEBPACK_IMPORTED_MODULE_5__.default)();
-(0,_modules_sendForm__WEBPACK_IMPORTED_MODULE_6__.default)();
-(0,_modules_showHint__WEBPACK_IMPORTED_MODULE_7__.default)();
-(0,_modules_sliders__WEBPACK_IMPORTED_MODULE_8__.default)();
-(0,_modules_popUpSlider__WEBPACK_IMPORTED_MODULE_9__.default)();
-(0,_modules_tabs__WEBPACK_IMPORTED_MODULE_10__.default)();
+(0,_modules_popUpPrivacy__WEBPACK_IMPORTED_MODULE_5__.default)();
+(0,_modules_validate__WEBPACK_IMPORTED_MODULE_6__.default)();
+(0,_modules_sendForm__WEBPACK_IMPORTED_MODULE_7__.default)();
+(0,_modules_showHint__WEBPACK_IMPORTED_MODULE_8__.default)();
+(0,_modules_sliders__WEBPACK_IMPORTED_MODULE_9__.default)();
+(0,_modules_popUpSlider__WEBPACK_IMPORTED_MODULE_10__.default)();
+(0,_modules_tabs__WEBPACK_IMPORTED_MODULE_11__.default)();
 }();
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 !function() {
