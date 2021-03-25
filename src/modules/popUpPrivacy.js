@@ -2,11 +2,13 @@ const popUpPrivacy = () => {
   const linkPrivacy = document.querySelectorAll('.link-privacy');
   const popupPrivacy = document.querySelector('.popup-privacy');
   const closeSign = document.querySelector('.popup-dialog-privacy .close');
+  const consultBtn = document.querySelector('.button_wide');
 
   const handlerPrivacy = (event) => {
     const target = event.target;
 
-    if (target.classList.contains('link-privacy')) {
+    if (target.classList.contains('link-privacy') || target.classList.contains('button_wide')) {
+      consultBtn.style.backgroundColor = 'transparent';
       popupPrivacy.style.visibility = 'visible';
     }
 
@@ -20,6 +22,7 @@ const popUpPrivacy = () => {
   });
 
   closeSign.addEventListener('click', handlerPrivacy);
+  consultBtn.addEventListener('click', handlerPrivacy);
 };
 
 export default popUpPrivacy;

@@ -4967,6 +4967,12 @@ div.wave-block:nth-child(17):after {
 .popup-dialog-privacy .close {
   top: 38px;
 }
+
+@media (max-width: 625px) {
+  .popup-dialog-privacy .close{
+    right: 16px;
+  }
+}
 .popup-privacy-wrap {
   position: relative;
   max-width: 1018px;
@@ -4982,6 +4988,13 @@ div.wave-block:nth-child(17):after {
   font-size: 26px;
   color: #ffffff;
 }
+
+@media (max-width: 6255px) {
+  .popup-privacy__title {
+    padding-left: 27px;
+  }
+}
+
 @media (max-width: 575px) {
   .popup-privacy__title {
     padding-left: 25px;

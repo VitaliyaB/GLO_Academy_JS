@@ -218,11 +218,13 @@ var popUpPrivacy = function popUpPrivacy() {
   var linkPrivacy = document.querySelectorAll('.link-privacy');
   var popupPrivacy = document.querySelector('.popup-privacy');
   var closeSign = document.querySelector('.popup-dialog-privacy .close');
+  var consultBtn = document.querySelector('.button_wide');
 
   var handlerPrivacy = function handlerPrivacy(event) {
     var target = event.target;
 
-    if (target.classList.contains('link-privacy')) {
+    if (target.classList.contains('link-privacy') || target.classList.contains('button_wide')) {
+      consultBtn.style.backgroundColor = 'transparent';
       popupPrivacy.style.visibility = 'visible';
     }
 
@@ -235,6 +237,7 @@ var popUpPrivacy = function popUpPrivacy() {
     item.addEventListener('click', handlerPrivacy);
   });
   closeSign.addEventListener('click', handlerPrivacy);
+  consultBtn.addEventListener('click', handlerPrivacy);
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (popUpPrivacy);
