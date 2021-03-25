@@ -17,9 +17,11 @@ const toggleMenu = () => {
       }
     }
 
-    if (target.classList.contains('close-menu') || target.matches('.popup-menu a') ||
-    (!target.closest('.popup-dialog-menu') && popupDialogMenu.classList.contains('showMenu') &&
-    !target.classList.contains('menu__icon')) || target.closest('.link-list-menu')) {
+    if (target.classList.contains('close-menu') ||
+        target.matches('.popup-menu a') ||
+        (!target.closest('.popup-dialog-menu') && popupDialogMenu.classList.contains('showMenu') &&
+        !target.classList.contains('menu__icon')) ||
+        target.closest('.link-list-menu')) {
       popupMenu.style.visibility = 'hidden';
       if (document.documentElement.clientWidth >= 575) {
         popupDialogMenu.style.transform = 'translate3d(645px, 0, 0)';

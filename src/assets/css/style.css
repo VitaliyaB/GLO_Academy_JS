@@ -5102,6 +5102,21 @@ div.wave-block:nth-child(17):after {
   content: "—";
   padding-left: 15px;
 }
+.popup-repair-types .close {
+  top: -16px;
+  right: 12px;
+}
+
+@media (max-width: 1024px) {
+  .popup-repair-types .close {
+    top: -13px;
+  }
+}
+@media (max-width: 575px) {
+  .popup-repair-types .close {
+    right: 7px;
+  }
+}
 .popup-repair-types-nav__title {
   display: -webkit-box;
   display: -ms-flexbox;
