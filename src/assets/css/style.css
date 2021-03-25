@@ -4963,6 +4963,10 @@ div.wave-block:nth-child(17):after {
     rgba(50, 40, 35, 0.42) 100%
   );
 }
+
+.popup-dialog-privacy .close {
+  top: 38px;
+}
 .popup-privacy-wrap {
   position: relative;
   max-width: 1018px;

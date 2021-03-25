@@ -217,14 +217,24 @@ __webpack_require__.r(__webpack_exports__);
 var popUpPrivacy = function popUpPrivacy() {
   var linkPrivacy = document.querySelectorAll('.link-privacy');
   var popupPrivacy = document.querySelector('.popup-privacy');
+  var closeSign = document.querySelector('.popup-dialog-privacy .close');
 
-  var handlerPrivacy = function handlerPrivacy() {
-    popupPrivacy.style.visibility = 'visible';
+  var handlerPrivacy = function handlerPrivacy(event) {
+    var target = event.target;
+
+    if (target.classList.contains('link-privacy')) {
+      popupPrivacy.style.visibility = 'visible';
+    }
+
+    if (target.classList.contains('close')) {
+      popupPrivacy.style.visibility = 'hidden';
+    }
   };
 
   linkPrivacy.forEach(function (item) {
     item.addEventListener('click', handlerPrivacy);
   });
+  closeSign.addEventListener('click', handlerPrivacy);
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (popUpPrivacy);
