@@ -498,7 +498,10 @@ var validate = function validate() {
     targetValue = targetValue.replace(/^\+7\(\d{3}/gi, function (match) {
       return match + ')';
     });
-    targetValue = targetValue.replace(/^\+7\(\d{3}\)\d{3}|^\+7\(\d{3}\)\d{3}-\d{2}/gi, function (match) {
+    targetValue = targetValue.replace(/^\+7\(\d{3}\)\d{3}/gi, function (match) {
+      return match + '-';
+    });
+    targetValue = targetValue.replace(/^\+7\(\d{3}\)\d{3}-\d{2}/gi, function (match) {
       return match + '-';
     });
     targetValue = targetValue.replace(/^\+7\(\d{3}\)\d{3}-\d{2}-\d{3,}/gi, function (match) {
