@@ -4,7 +4,7 @@ const popUpRepairTypes = () => {
   const closeSign = document.querySelector('.popup-repair-types .close');
 
   const handlerRepairTypes = (event) => {
-    const event = event.target;
+    const target = event.target;
     popupRepairTypes.style.visibility = 'visible';
 
     // if (target.closest('.popup-repair-types" && )
