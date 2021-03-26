@@ -2,7 +2,7 @@ import '@styles/style.css';
 import togglePhones from '@modules/togglePhones';
 import toggleMenu from '@modules/toggleMenu';
 import scrollPage from '@modules/scrollPage';
-import popUps from '@modules/popUps';
+import togglePopUps from '@modules/togglePopUps';
 import validate from '@modules/validate';
 import sendForm from '@modules/sendForm';
 import showHint from '@modules/showHint';
@@ -18,7 +18,7 @@ window.onload = () => {
 togglePhones();
 toggleMenu();
 scrollPage();
-popUps();
+togglePopUps();
 validate();
 sendForm();
 showHint();

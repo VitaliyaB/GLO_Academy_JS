@@ -1,4 +1,4 @@
-const popUps = () => {
+const togglePopUps = () => {
   const linkListsMenu = document.querySelectorAll('.link-list-menu .menu-link');
   const closeSign = document.querySelectorAll('.popup .close');
   const linkPrivacy = document.querySelectorAll('.link-privacy');
@@ -58,4 +58,4 @@ const popUps = () => {
   });
 };
 
-export default popUps;
+export default togglePopUps;
