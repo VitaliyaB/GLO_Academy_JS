@@ -4712,6 +4712,7 @@ div.wave-block:nth-child(17):after {
   background: rgba(50, 40, 35, 0.4);
   color: #322823;
   z-index: 9999;
+
 }
 @media (max-width: 575px) {
   .popup {
@@ -6960,6 +6961,7 @@ div.wave-block:nth-child(17):after {
   text-align: center;
   min-width: 320px;
   display: block;
+  transition: none;
 }
 @media (max-width: 1024px) {
   .nav-list-popup-repair {
