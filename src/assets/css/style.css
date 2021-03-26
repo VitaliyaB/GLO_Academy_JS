@@ -1086,9 +1086,10 @@ template,
   -ms-flex-pack: center;
   justify-content: center;
 }
-.formula-title {
+.section-title.formula-title {
   max-width: 391px;
   line-height: 45px;
+  z-index: -1;
 }
 @media (max-width: 1024px) {
   .formula-title {
@@ -1146,6 +1147,7 @@ template,
 .formula-item strong {
   font-weight: 500;
 }
+
 .formula-item__descr {
   width: 188px;
   padding-top: 10px;
@@ -1222,14 +1224,14 @@ template,
 }
 .formula-item-popup {
   position: absolute;
-  bottom: 90px;
+  bottom: 70px;
   visibility: hidden;
-  width: 423px;
+  width: 397px;
   padding: 20px 40px 0;
   font-style: normal;
   font-weight: 300;
   line-height: 25px;
-  font-size: 19px;
+  font-size: 17px;
   text-align: left;
   -webkit-transform: translate3d(0, -5px, 0);
   transform: translate3d(0, -5px, 0);
@@ -1266,8 +1268,21 @@ template,
     max-width: 290px;
   }
 }
+.active-item__reverse .formula-item-popup:before {
+  transform: rotateX(180deg);
+}
+
 .formula-item-popup-01 {
-  min-height: 146px;
+  min-height: 126px;
+  bottom: 80px;
+  left: -142px;
+  padding: 18px 39px 0;
+}
+.active-item__reverse .formula-item-popup-01 {
+  bottom: -136px;
+  left: -146px;
+  padding: 28px 18px 0;
+  min-height: 129px;
 }
 @media (max-width: 575px) {
   .formula-item-popup-01 {
@@ -1287,6 +1302,13 @@ template,
 }
 .formula-item-popup-02 {
   min-height: 191px;
+}
+.active-item__reverse .formula-item-popup-02 {
+  bottom: -160px;
+  left: -126px;
+      padding: 26px 17px 0;
+  width: 344px;
+  min-height: 153px;
 }
 @media (max-width: 575px) {
   .formula-item-popup-02 {
@@ -1313,6 +1335,13 @@ template,
 .formula-item-popup-03 {
   min-height: 220px;
 }
+.active-item__reverse .formula-item-popup-03 {
+  bottom: -192px;
+  left: -136px;
+  padding: 23px 27px 0;
+  min-height: 185px;
+  width: 362px;
+}
 @media (max-width: 575px) {
   .formula-item-popup-03 {
     min-height: 151px;
@@ -1331,6 +1360,13 @@ template,
 }
 .formula-item-popup-04 {
   min-height: 171px;
+}
+.active-item__reverse .formula-item-popup-04 {
+  bottom: -142px;
+  left: -123px;
+  padding: 21px 22px 0;
+  min-height: 136px;
+  width: 367px;
 }
 @media (max-width: 575px) {
   .formula-item-popup-04 {
@@ -1351,6 +1387,13 @@ template,
 .formula-item-popup-05 {
   min-height: 237px;
 }
+.active-item__reverse .formula-item-popup-05 {
+  bottom: -206px;
+  left: -128px;
+  min-height: 190px;
+  padding: 27px 6px 0;
+  width: 376px;
+}
 @media (max-width: 575px) {
   .formula-item-popup-05 {
     min-height: 163px;
@@ -1370,6 +1413,13 @@ template,
 }
 .formula-item-popup-06 {
   min-height: 183px;
+}
+.active-item__reverse .formula-item-popup-06 {
+  left: -119px;
+  bottom: -150px;
+  min-height: 143px;
+  padding: 20px 14px 0;
+  width: 347px;
 }
 .formula-item-popup-06 p {
   letter-spacing: -0.2px;
