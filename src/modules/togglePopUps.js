@@ -8,8 +8,6 @@ const togglePopUps = () => {
   const popupPrivacy = document.querySelector('.popup-privacy');
   const popupConsultation = document.querySelector('.popup-consultation');
 
-
-
   const handlerPopUp = (event) => {
     const target = event.target;
     console.log('handlerPopUp ~ target', target);
