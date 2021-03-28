@@ -3,12 +3,13 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
   const itemsWrapper = document.querySelector('.' + itemsWrapperClass);
   let slides = document.querySelectorAll('.' + slidesClass);
   const slideStyles = window.getComputedStyle(slides[0]);
-  const slideWidth = slides[0].offsetWidth + parseInt(slideStyles.marginLeft) + parseInt(slideStyles.marginRight);
+  const slideWidth = slides[0].offsetWidth + parseFloat(slideStyles.marginLeft) + parseFloat(slideStyles.marginRight);
   const visibleSlides = Math.floor(sliderWrapperWidth / slideWidth);
   let cloneFirst;
   let cloneLast;
   const cloneFirstItems = [];
   const cloneLastItems = [];
+  let interval;
 
   // * cloning items
   for (let i = 0; i < visibleSlides; i++) {
@@ -78,9 +79,35 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
     itemsWrapper.style.transition = '.7s';
   };
 
+  const scrollRight = () => {
+    checkAllItems();
+    if (index >= slides.length - 1) return;
+    index++;
+    scrollSlides();
+  };
+
+  const scrollLeft = () => {
+    checkAllItems();
+    if (index <= 0) return;
+    index--;
+    scrollSlides();
+  };
+
+  const startSlide = () => {
+    interval = setInterval(scrollRight, 1500);
+  };
+
+  const stopSlide = () => {
+    clearInterval(interval);
+  };
+
   if (activeClass === '.formula' || activeClass === '.problems') {
     checkAllItems();
     switchActive();
+  }
+
+  if (activeClass === '.partners') {
+    startSlide();
   }
 
   const scrollElem = (event) => {
@@ -98,15 +125,11 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
       }
 
       if (target.closest('.slider-arrow_right')) {
-        if (index >= slides.length - 1) return;
-        index++;
-        scrollSlides();
+        scrollRight();
       }
 
       if (target.closest('.slider-arrow_left')) {
-        if (index <= 0) return;
-        index--;
-        scrollSlides();
+        scrollLeft();
       }
     }
   };
@@ -132,8 +155,21 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
       checkRefresh(refresh);
     }
   });
+
   sliderWrapper.addEventListener('click', scrollElem);
 
+  if (activeClass === '.partners') {
+    sliderWrapper.addEventListener('mouseover', (event) => {
+      if (event.target.closest('.' + itemsWrapperClass) || event.target.closest('.slider-arrow')) {
+        stopSlide();
+      }
+    });
+    sliderWrapper.addEventListener('mouseout',  (event) => {
+      if (event.target.closest('.' + itemsWrapperClass) || event.target.closest('.slider-arrow')) {
+        startSlide();
+      }
+    });
+  }
 };
 
 export default createSlider;

@@ -15,6 +15,10 @@ const startSlider = () => {
   const reviewsSliderWrapper = document.querySelector('.reviews-slider-wrap');
   createSlider(reviewsSliderWrapper, 'reviews-item__wrapper', 'reviews-slider__slide', '.reviews');
 
+  // * partners slides
+  const partnersSliderWrapper = document.querySelector('.partners-slider-wrap');
+  createSlider(partnersSliderWrapper, 'partners-item__wrapper', 'partners-slider__slide', '.partners');
+
 };
 
 export default startSlider;

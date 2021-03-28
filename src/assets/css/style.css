@@ -1035,17 +1035,13 @@ template,
   justify-content: unset;
   opacity: 0.4;
   font-size: 18px;
-  width: 250px;
-}
-@media (max-width: 864px) {
-  .formula-slider .formula-slider__slide {
-    width: 200px;
-  }
+  flex: 0 0 33.3%;
+  max-width: 33.3%;
 }
 @media (max-width: 575px) {
   .formula-slider .formula-slider__slide {
-    width: 200px;
-    margin: 0 55px;
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 }
 
@@ -2791,13 +2787,8 @@ div.wave-block:nth-child(17):after {
   opacity: 0.5;
 }
 .problems-item.problems-slider__slide {
-  margin: 3px 85px;
-}
-@media (max-width: 575px) {
-  .problems-item.problems-slider__slide {
-    margin: 3px 20px;
-    max-width: 250px;
-  }
+  max-width: 100%;
+  flex: 0 0 100%;
 }
 .problems-slider__slide .problems-item {
   width: 100%;
@@ -4170,6 +4161,8 @@ div.wave-block:nth-child(17):after {
   text-align: center;
   color: #322823;
   min-height: 100%;
+  max-width: 100%;
+  flex: 0 0 100%;
 }
 .reviews-slider__slide-img {
   position: relative;
@@ -4677,6 +4670,7 @@ div.wave-block:nth-child(17):after {
   margin-top: 83px;
   -webkit-transition: 1s;
   transition: 1s;
+  overflow: hidden;
 }
 @media (max-width: 1024px) {
   .partners-slider {
@@ -4689,6 +4683,9 @@ div.wave-block:nth-child(17):after {
     margin-top: 50px;
   }
 }
+.partners-item__wrapper {
+  display: flex;
+}
 .partners-slider__slide {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4699,15 +4696,11 @@ div.wave-block:nth-child(17):after {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  min-height: 150px;
-  margin-left: auto;
-  margin-right: auto;
+  min-height: auto;
+  max-width: 33.3%;
+  flex: 0 0 33.3%;
 }
 @media (max-width: 1024px) {
-  .partners-slider__slide {
-    max-width: 114px;
-    min-height: auto;
-  }
   .partners-slider__slide svg {
     max-width: 114px;
     max-height: 75px;
@@ -4716,10 +4709,6 @@ div.wave-block:nth-child(17):after {
   }
 }
 @media (max-width: 575px) {
-  .partners-slider__slide {
-    max-width: 134px;
-    min-height: auto;
-  }
   .partners-slider__slide svg {
     max-width: 134px;
     max-height: 80px;
