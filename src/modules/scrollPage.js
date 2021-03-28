@@ -4,9 +4,6 @@ const scrollPage = () => {
 
   const scrollToTarget = (event) => {
     event.preventDefault();
-
-    console.log(event.target);
-
     const target = event.target.closest('a');
     const linkHref = target.getAttribute('href').slice(1);
 

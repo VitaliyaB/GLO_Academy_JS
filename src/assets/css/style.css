@@ -7533,7 +7533,7 @@ div.wave-block:nth-child(17):after {
 }
 @media (max-width: 1024px) {
   .button-feedback-block {
-    margin-top: 30px;
+    margin-top: 20px;
     margin-right: -42px;
     -webkit-box-ordinal-group: 2;
     -ms-flex-order: 1;
@@ -7545,7 +7545,7 @@ div.wave-block:nth-child(17):after {
     -webkit-box-ordinal-group: 1;
     -ms-flex-order: 0;
     order: 0;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
     width: 156px;
@@ -7616,7 +7616,7 @@ div.wave-block:nth-child(17):after {
 }
 @media (max-width: 1024px) {
   .checkbox-feedback-block {
-    padding-top: 33px;
+    padding-top: 20px;
     max-width: 237px;
   }
 }
@@ -8730,4 +8730,12 @@ strong {
 
 .slider-dots {
   display: none;
+}
+.err-message {
+  font-size: 0.9rem;
+}
+@media (max-width: 575px) {
+  .err-message {
+    font-size: 10px;
+  }
 }

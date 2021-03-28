@@ -8,12 +8,8 @@ const togglePopUps = () => {
   const popupPrivacy = document.querySelector('.popup-privacy');
   const popupConsultation = document.querySelector('.popup-consultation');
 
-
-
   const handlerPopUp = (event) => {
     const target = event.target;
-    console.log('handlerPopUp ~ target', target);
-    console.log('handlerPopUp ~ event', event);
 
     // * popup repair types
     if (target.matches('.link-list-menu .menu-link')) {
@@ -27,6 +23,11 @@ const togglePopUps = () => {
 
     // * popup consultation
     if (target.classList.contains('button_wide')) {
+      const errMessage = popupConsultation.querySelectorAll('.err-message');
+
+      errMessage.forEach((item) => {
+        item.remove();
+      });
       popupConsultation.style.visibility = 'visible';
     }
 
