@@ -1018,8 +1018,9 @@ template,
   }
 }
 .formula-slider {
-  min-height: 400px;
+  min-height: 360px;
   margin-top: 102px;
+  overflow: hidden;
 }
 @media (max-width: 575px) {
   .formula-slider {
@@ -1027,13 +1028,26 @@ template,
     margin-top: 52px;
   }
 }
-.formula-slider__slide {
+.formula-slider .formula-slider__slide {
   position: relative;
   margin-left: auto;
   margin-right: auto;
+  justify-content: unset;
   opacity: 0.4;
   font-size: 18px;
+  width: 250px;
 }
+
+@media (max-width: 864px) {
+  .formula-slider .formula-slider__slide {
+    width: 200px;
+  }
+}
+
+.formula-slider .formula-slider__slide.active-item {
+  opacity: 1;
+}
+
 .formula-slider__slide:before {
   position: absolute;
   width: 100%;
@@ -1048,6 +1062,12 @@ template,
 }
 .formula-slider__slide .formula-item__descr {
   width: 250px;
+}
+
+@media (max-width: 864px) {
+  .formula-slider__slide .formula-item__descr {
+    width: 200px;
+  }
 }
 .formula-slider__slide .formula-item__icon {
   width: 56px;
@@ -1072,7 +1092,7 @@ template,
 }
 @media (max-width: 575px) {
   .formula-slider-wrap {
-    width: 290px;
+    width: 334px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -1122,6 +1142,12 @@ template,
     margin-top: -42px;
   }
 }
+
+.formula-item__wrapper {
+  display: flex;
+  margin-left: 0;
+}
+
 .formula-item {
   position: relative;
   display: -webkit-box;
@@ -1272,7 +1298,7 @@ template,
   transform: rotateX(180deg);
 }
 
-.formula-item-popup-01 {
+.formula-item .formula-item-popup-01 {
   min-height: 126px;
   bottom: 80px;
   left: -142px;
@@ -1300,8 +1326,17 @@ template,
   background-size: contain;
   z-index: -1;
 }
-.formula-item-popup-02 {
-  min-height: 191px;
+.formula-slider__slide .formula-item-popup-01 {
+  width: 360px;
+  left: -140px;
+  padding: 29px 48px 0;
+}
+.formula-item .formula-item-popup-02 {
+  min-height: 161px;
+  width: 369px;
+  padding: 11px 40px 0;
+  left: -141px;
+  bottom: 77px;
 }
 .active-item__reverse .formula-item-popup-02 {
   bottom: -160px;
@@ -1325,6 +1360,12 @@ template,
   background: url("../images/formula/item_popup_2.svg") no-repeat;
   background-size: contain;
   z-index: -1;
+}
+.formula-slider__slide .formula-item-popup-02 {
+  bottom: 80px;
+  width: 344px;
+  padding: 24px 27px 0;
+  left: -131px;
 }
 @media (max-width: 575px) {
   .formula-item-popup-02:before {
@@ -1358,6 +1399,16 @@ template,
   background-size: contain;
   z-index: -1;
 }
+.formula-slider__slide .formula-item-popup-03 {
+  width: 342px;
+  padding: 20px 28px 0;
+  min-height: 178px;
+}
+@media (max-width: 864px) {
+  .formula-slider__slide .formula-item-popup-03 {
+    top: 165px;
+  }
+}
 .formula-item-popup-04 {
   min-height: 171px;
 }
@@ -1384,8 +1435,17 @@ template,
   background-size: contain;
   z-index: -1;
 }
-.formula-item-popup-05 {
-  min-height: 237px;
+.formula-slider__slide .formula-item-popup-04 {
+  width: 358px;
+  padding: 24px 39px 0;
+  min-height: 140px;
+  left: -145px;
+}
+.formula-item .formula-item-popup-05 {
+  min-height: 198px;
+  left: -138px;
+  bottom: 77px;
+  padding: 20px 23px 0;
 }
 .active-item__reverse .formula-item-popup-05 {
   bottom: -206px;
@@ -1410,6 +1470,11 @@ template,
   background: url("../images/formula/item_popup_5.svg") no-repeat;
   background-size: contain;
   z-index: -1;
+}
+.formula-slider__slide .formula-item-popup-05 {
+  min-height: 192px;
+  padding: 17px 35px 0;
+  width: 350px;
 }
 .formula-item-popup-06 {
   min-height: 183px;
@@ -1439,6 +1504,11 @@ template,
   background: url("../images/formula/item_popup_6.svg") no-repeat;
   background-size: contain;
   z-index: -1;
+}
+.formula-slider__slide .formula-item-popup-06 {
+  width: 348px;
+  padding: 29px 26px 0;
+  min-height: 149px;
 }
 @media (max-width: 575px) {
   .formula-item-popup-06:before {
@@ -7776,6 +7846,7 @@ div.wave-block:nth-child(17):after {
   visibility: visible;
   opacity: 1;
 }
+
 .active-item-partners {
   max-width: 217px;
   min-height: auto;
@@ -7879,43 +7950,43 @@ div.wave-block:nth-child(17):after {
 }
 
 #formula-arrow_left {
-  left: -17px;
+  left: -3%;
 }
 @media (max-width: 864px) {
   #formula-arrow_left {
-    top: 42%;
-    left: 25px;
+    top: 46%;
+    left: -5%;
   }
 }
 @media (max-width: 767px) {
   #formula-arrow_left {
-    left: 50px;
+    left: 5px;
   }
 }
 @media (max-width: 575px) {
   #formula-arrow_left {
-    left: 65px;
+    left: 35px;
     top: 50%;
   }
 }
 
 #formula-arrow_right {
-  right: -24px;
+  right: -3%;
 }
 @media (max-width: 864px) {
   #formula-arrow_right {
-    top: 42%;
-    right: 25px;
+    top: 46%;
+    right: -5%;
   }
 }
 @media (max-width: 767px) {
   #formula-arrow_right {
-    right: 50px;
+    right: 5px;
   }
 }
 @media (max-width: 575px) {
   #formula-arrow_right {
-    right: 65px;
+    right: 35px;
     top: 50%;
   }
 }
@@ -8197,6 +8268,17 @@ strong {
     max-width: 290px;
     padding-left: 0;
     padding-right: 0;
+  }
+}
+
+.formula .wrapper_small.desktop-hide {
+  padding: 0;
+  max-width: 750px;
+}
+
+@media (max-width: 864px) {
+  .formula .wrapper_small.desktop-hide {
+    max-width: 600px;
   }
 }
 .wrapper_feedback {

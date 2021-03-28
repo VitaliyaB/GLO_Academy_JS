@@ -9,6 +9,7 @@ import showHint from '@modules/showHint';
 import sliders from '@modules/sliders';
 import popUpSlider from '@modules/popUpSlider';
 import tabs from '@modules/tabs';
+import sliderHint from '@modules/sliderHint';
 
 window.onload = () => {
   const body = document.querySelector('.preload');
@@ -25,3 +26,4 @@ showHint();
 sliders();
 popUpSlider();
 tabs();
+sliderHint();
