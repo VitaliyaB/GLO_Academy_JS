@@ -6,9 +6,9 @@ import togglePopUps from '@modules/togglePopUps';
 import validate from '@modules/validate';
 import sendForm from '@modules/sendForm';
 import showHint from '@modules/showHint';
-import popUpSlider from '@modules/popUpSlider';
 import tabs from '@modules/tabs';
 import startSlider from '@modules/startSlider';
+import accordion from '@modules/accordion';
 
 window.onload = () => {
   const body = document.querySelector('.preload');
@@ -18,10 +18,10 @@ window.onload = () => {
 togglePhones();
 toggleMenu();
 scrollPage();
+startSlider();
 togglePopUps();
+showHint();
 validate();
 sendForm();
-showHint();
-popUpSlider();
+accordion();
 tabs();
-startSlider();
