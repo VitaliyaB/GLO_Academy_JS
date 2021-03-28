@@ -1,35 +1,44 @@
 const showHint = () => {
   const formulaItem = document.querySelectorAll('.formula-item');
+  const problemsItem = document.querySelectorAll('.problems-item');
 
-  const showFormulaPopUp = (event) => {
+  const showFormulaPopUp = (event, className) => {
     if (document.documentElement.clientWidth <= 1024) return;
     const target = event.target;
-    const eventFormula = target.closest('.formula-item');
-    const popUpItem = eventFormula.querySelector('.formula-item-popup');
-    const itemDescr = eventFormula.querySelector('.formula-item__descr');
+    const eventBlock = target.closest(className + '-item');
+    const popUpItem = eventBlock.querySelector(className + '-item-popup');
 
-    if (eventFormula.classList.contains('active-item')) {
-      eventFormula.classList.remove('active-item');
-      popUpItem.style.visibility = 'hidden';
-      itemDescr.style.visibility = 'visible';
+    if (eventBlock.classList.contains('active-item')) {
+      eventBlock.classList.remove('active-item');
     } else {
-      popUpItem.style.visibility = 'visible';
-      eventFormula.classList.add('active-item');
-
       const hintTop = popUpItem.getBoundingClientRect().top;
+      eventBlock.classList.add('active-item');
 
       if (hintTop < 0) {
-        eventFormula.classList.add('active-item__reverse');
-        itemDescr.style.visibility = 'hidden';
+        eventBlock.classList.add('active-item__reverse');
       }
     }
   };
 
   formulaItem.forEach((item) => {
-    item.addEventListener('mouseover', showFormulaPopUp);
+    item.addEventListener('mouseover', (event) => {
+      showFormulaPopUp(event, '.formula');
+    });
   });
   formulaItem.forEach((item) => {
-    item.addEventListener('mouseout', showFormulaPopUp);
+    item.addEventListener('mouseout', (event) => {
+      showFormulaPopUp(event, '.formula');
+    });
+  });
+  problemsItem.forEach((item) => {
+    item.addEventListener('mouseover', (event) => {
+      showFormulaPopUp(event, '.problems');
+    });
+  });
+  problemsItem.forEach((item) => {
+    item.addEventListener('mouseout', (event) => {
+      showFormulaPopUp(event, '.problems');
+    });
   });
 };
 

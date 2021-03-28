@@ -1037,10 +1037,15 @@ template,
   font-size: 18px;
   width: 250px;
 }
-
 @media (max-width: 864px) {
   .formula-slider .formula-slider__slide {
     width: 200px;
+  }
+}
+@media (max-width: 575px) {
+  .formula-slider .formula-slider__slide {
+    width: 200px;
+    margin: 0 55px;
   }
 }
 
@@ -1092,9 +1097,8 @@ template,
 }
 @media (max-width: 575px) {
   .formula-slider-wrap {
-    width: 334px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 290px;
+    margin: 0 auto;
   }
 }
 .formula .row {
@@ -1145,7 +1149,6 @@ template,
 
 .formula-item__wrapper {
   display: flex;
-  margin-left: 0;
 }
 
 .formula-item {
@@ -1331,6 +1334,16 @@ template,
   left: -140px;
   padding: 29px 48px 0;
 }
+@media (max-width: 575px) {
+  .formula-slider__slide .formula-item-popup-01 {
+    min-height: 95px;
+    padding: 22px 39px 0;
+    max-width: 270px;
+    width: 290px;
+    left: -111px;
+    bottom: auto;
+  }
+}
 .formula-item .formula-item-popup-02 {
   min-height: 161px;
   width: 369px;
@@ -1338,6 +1351,7 @@ template,
   left: -141px;
   bottom: 77px;
 }
+
 .active-item__reverse .formula-item-popup-02 {
   bottom: -160px;
   left: -126px;
@@ -1366,6 +1380,16 @@ template,
   width: 344px;
   padding: 24px 27px 0;
   left: -131px;
+}
+@media (max-width: 575px) {
+  .formula-slider__slide .formula-item-popup-02 {
+    min-height: 105px;
+    padding: 9px 40px 0;
+    max-width: 270px;
+    width: 290px;
+    bottom: auto;
+    left: -110px;
+  }
 }
 @media (max-width: 575px) {
   .formula-item-popup-02:before {
@@ -1409,6 +1433,14 @@ template,
     top: 165px;
   }
 }
+@media (max-width: 575px) {
+  .formula-slider__slide .formula-item-popup-03 {
+    max-width: 270px;
+    width: 290px;
+    top: 63px;
+    padding: 54px 22px 0;
+  }
+}
 .formula-item-popup-04 {
   min-height: 171px;
 }
@@ -1440,6 +1472,14 @@ template,
   padding: 24px 39px 0;
   min-height: 140px;
   left: -145px;
+}
+@media (max-width: 575px) {
+  .formula-slider__slide .formula-item-popup-04 {
+    max-width: 270px;
+    width: 290px;
+    min-height: 110px;
+    left: -111px;
+  }
 }
 .formula-item .formula-item-popup-05 {
   min-height: 198px;
@@ -1476,6 +1516,14 @@ template,
   padding: 17px 35px 0;
   width: 350px;
 }
+@media (max-width: 575px) {
+  .formula-slider__slide .formula-item-popup-05 {
+    max-width: 270px;
+    width: 290px;
+    min-height: 153px;
+    left: -111px;
+  }
+}
 .formula-item-popup-06 {
   min-height: 183px;
 }
@@ -1509,6 +1557,15 @@ template,
   width: 348px;
   padding: 29px 26px 0;
   min-height: 149px;
+}
+@media (max-width: 575px) {
+  .formula-slider__slide .formula-item-popup-06 {
+    max-width: 270px;
+    width: 290px;
+    min-height: 114px;
+    left: -111px;
+    top: 80px;
+  }
 }
 @media (max-width: 575px) {
   .formula-item-popup-06:before {
@@ -2709,6 +2766,7 @@ div.wave-block:nth-child(17):after {
 }
 .problems-slider {
   height: 726px;
+  overflow: hidden;
 }
 @media (max-width: 575px) {
   .problems-slider {
@@ -2718,16 +2776,28 @@ div.wave-block:nth-child(17):after {
 }
 .problems-slider-wrap {
   margin-top: 70px;
+  width: 490px;
+  margin: 0 auto;
 }
 @media (max-width: 575px) {
   .problems-slider-wrap {
     margin-top: 50px;
+    width: 290px;
   }
 }
 .problems-slider__slide {
   margin-left: auto;
   margin-right: auto;
   opacity: 0.5;
+}
+.problems-item.problems-slider__slide {
+  margin: 3px 85px;
+}
+@media (max-width: 575px) {
+  .problems-item.problems-slider__slide {
+    margin: 3px 20px;
+    max-width: 250px;
+  }
 }
 .problems-slider__slide .problems-item {
   width: 100%;
@@ -2737,6 +2807,9 @@ div.wave-block:nth-child(17):after {
   height: 56px;
   -webkit-transition: 0.4s;
   transition: 0.4s;
+}
+.problems-item__wrapper {
+  display: flex;
 }
 .problems-item {
   position: relative;
@@ -2916,7 +2989,7 @@ div.wave-block:nth-child(17):after {
 }
 @media (max-width: 575px) {
   .problems-item-popup:before {
-    max-width: 290px;
+    max-width: 280px;
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
@@ -2928,7 +3001,7 @@ div.wave-block:nth-child(17):after {
 }
 @media (min-width: 1025px) {
   .problems-item-popup-1 {
-    top: 140px;
+    top: 100px;
   }
 }
 @media (max-width: 575px) {
@@ -2960,6 +3033,9 @@ div.wave-block:nth-child(17):after {
 .problems-item-popup-2 {
   min-height: 304px;
 }
+.active-item__reverse .problems-item-popup-2 {
+  top: 100px;
+}
 @media (max-width: 575px) {
   .problems-item-popup-2 {
     min-height: 318px;
@@ -2984,6 +3060,9 @@ div.wave-block:nth-child(17):after {
 .problems-item-popup-3 {
   min-height: 323px;
 }
+.active-item__reverse .problems-item-popup-3 {
+  top: 100px;
+}
 .problems-item-popup-3:before {
   position: absolute;
   top: 0;
@@ -3002,6 +3081,9 @@ div.wave-block:nth-child(17):after {
 }
 .problems-item-popup-4 {
   min-height: 304px;
+}
+.active-item__reverse .problems-item-popup-4 {
+  top: 100px;
 }
 .problems-item-popup-4:before {
   position: absolute;
@@ -7926,11 +8008,13 @@ div.wave-block:nth-child(17):after {
 .active-item .problems-item__icon-inner svg path {
   fill: #ffffff;
 }
-@media (max-width: 1024px) {
-  .active-item .problems-item-popup {
-    visibility: visible;
-    opacity: 1;
-  }
+.active-item .problems-item-popup {
+  visibility: visible;
+  opacity: 1;
+}
+
+.active-item__reverse .problems-item-popup:before {
+  transform: rotateX(180deg);
 }
 
 #designs
@@ -7965,7 +8049,7 @@ div.wave-block:nth-child(17):after {
 }
 @media (max-width: 575px) {
   #formula-arrow_left {
-    left: 35px;
+    left: 0px;
     top: 50%;
   }
 }
@@ -7986,7 +8070,7 @@ div.wave-block:nth-child(17):after {
 }
 @media (max-width: 575px) {
   #formula-arrow_right {
-    right: 35px;
+    right: 0px;
     top: 50%;
   }
 }
@@ -8071,7 +8155,7 @@ div.wave-block:nth-child(17):after {
 }
 @media (max-width: 767px) {
   #problems-arrow_left {
-    left: 60px;
+    left: 30px;
   }
 }
 @media (max-width: 575px) {
@@ -8087,7 +8171,7 @@ div.wave-block:nth-child(17):after {
 }
 @media (max-width: 767px) {
   #problems-arrow_right {
-    right: 60px;
+    right: 30px;
   }
 }
 @media (max-width: 575px) {
@@ -8279,6 +8363,11 @@ strong {
 @media (max-width: 864px) {
   .formula .wrapper_small.desktop-hide {
     max-width: 600px;
+  }
+}
+@media (max-width: 575px) {
+  .formula .wrapper_small.desktop-hide {
+    max-width: 290px;
   }
 }
 .wrapper_feedback {
