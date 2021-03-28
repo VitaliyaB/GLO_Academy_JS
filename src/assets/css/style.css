@@ -4148,6 +4148,9 @@ div.wave-block:nth-child(17):after {
     margin-top: 65px;
   }
 }
+.reviews-item__wrapper {
+  display: flex;
+}
 .reviews-slider__slide {
   display: -webkit-box;
   display: -ms-flexbox;
