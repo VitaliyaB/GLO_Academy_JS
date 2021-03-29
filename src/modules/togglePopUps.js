@@ -113,6 +113,8 @@ const togglePopUps = () => {
 
   portfolioSliderFrameDesktop.forEach((item, idx) => {
     item.addEventListener('click', (event) => {
+      console.log('item.addEventListener ~ event', event);
+      console.log('item.addEventListener ~ idx', idx);
       handlerPopUp(event, idx);
     });
   });

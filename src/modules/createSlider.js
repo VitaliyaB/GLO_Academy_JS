@@ -21,6 +21,7 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
   if (activeClass === '.popup-portfolio') {
     const popUpPortfolio = document.querySelector(activeClass);
     portfolioText = popUpPortfolio.querySelectorAll('.popup-portfolio-text');
+    console.log('createSlider ~ portfolioText', portfolioText);
   }
 
   if (activeClass === '.portfolioDesktop') {
@@ -101,18 +102,18 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
     }
   };
 
-  const toggleText = () => {
-    if (activeClass === '.popup-portfolio') {
-      portfolioText[prevText].style.display = 'none';
-      prevText = index;
-      portfolioText[index].style.display = 'flex';
-    }
-  };
-
   const scrollSlides = (refresh) => {
     checkRefresh(refresh);
     itemsWrapper.style.transform = `translateX(${-slideWidth * index}px)`;
     itemsWrapper.style.transition = '.7s';
+  };
+
+  const toggleText = (i) => {
+    if (activeClass === '.popup-portfolio') {
+      portfolioText[prevText].style.display = 'none';
+      prevText = i - 1;
+      portfolioText[prevText].style.display = 'flex';
+    }
   };
 
   const pagination = () => {
@@ -128,51 +129,56 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
     }
 
     sliderCounterCurrent.textContent = page;
+    toggleText(page);
   };
 
   const scrollRight = () => {
     checkAllItems();
 
     if (index >= slides.length - 1) return;
+
     if (activeClass === '.portfolioDesktop') {
-      if (window.offsetWidth > 575) {
+      if (document.documentElement.clientWidth > 575) {
         arrowLeft.style.display = 'flex';
         if (index === slidesLength - 1 - visibleSlides) {
           arrowRight.style.display = 'none';
         }
       }
     }
+
     index++;
     scrollSlides();
+
     if (activeClass === '.popup-transparency' ||
       activeClass === '.repair-types' ||
       activeClass === '.portfolio' ||
       activeClass === '.popup-portfolio') {
 
-      toggleText();
       pagination();
     }
   };
 
   const scrollLeft = () => {
     checkAllItems();
+
     if (activeClass === '.portfolioDesktop') {
-      if (window.offsetWidth > 575) {
+      if (document.documentElement.clientWidth > 575) {
         arrowRight.style.display = 'flex';
         if (index === 1) {
           arrowLeft.style.display = 'none';
         }
       }
     }
+
     if (index <= 0) return;
     index--;
     scrollSlides();
+
     if (activeClass === '.popup-transparency' ||
       activeClass === '.repair-types' ||
       activeClass === '.portfolio' ||
       activeClass === '.popup-portfolio') {
 
-      toggleText();
       pagination();
     }
   };
@@ -202,7 +208,6 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
     const sliderCounterTotal = document.querySelector(activeClass + '-slider-wrap .slider-counter-content__total');
     sliderCounterTotal.textContent = slidesLength;
 
-    toggleText();
     pagination();
   }
 
