@@ -3,18 +3,20 @@ import createSlider from '@modules/createSlider';
 const toggleTabs = () => {
   const clientWidth = document.documentElement.clientWidth;
   const repairTypesTab = document.querySelector('.repair-types-tab');
+  const navListRepair = repairTypesTab.querySelector('.nav-list-repair');
   const repairTypesButtons = repairTypesTab.querySelectorAll('button');
   const tabLength = repairTypesButtons.length;
+  const startPos = repairTypesButtons[0].getBoundingClientRect().left;
   const endPos = repairTypesTab.querySelector('.repair-types-nav').getBoundingClientRect().right;
-  console.log('toggleTabs ~ endPos', endPos);
-  const navListRepair = repairTypesTab.querySelector('.nav-list-repair');
+  const arrowRight = repairTypesTab.querySelector('.nav-arrow_right');
+  const arrowLeft = repairTypesTab.querySelector('.nav-arrow_left');
   let cloneTypeRepairWrap;
   let targetIndex = 0;
   let typeRepair;
-  const startPos = repairTypesButtons[0].getBoundingClientRect().left;
-  console.log('toggleTabs ~ startPos', startPos);
   let countSlide = 0;
   let scrollLength = 0;
+
+  arrowLeft.style.visibility = 'hidden';
 
   const getElem = () => {
     typeRepair = document.querySelector(`.types-repair${targetIndex + 1}`);
@@ -38,12 +40,14 @@ const toggleTabs = () => {
     if (target.type === 'button') {
 
       if (clientWidth <= 1024) {
-        if (target.getBoundingClientRect().right > endPos) {
-          scrollLength += -(target.getBoundingClientRect().right - endPos);
+        const targetRightPos = target.getBoundingClientRect().right;
+        const targetLeftPos = target.getBoundingClientRect().left;
+        if (targetRightPos > endPos) {
+          scrollLength += -(targetRightPos - endPos);
           navListRepair.style.marginLeft = scrollLength + 'px';
         }
-        if (target.getBoundingClientRect().left < startPos) {
-          scrollLength += (startPos - target.getBoundingClientRect().left);
+        if (targetLeftPos < startPos) {
+          scrollLength += (startPos - targetLeftPos);
           navListRepair.style.marginLeft = scrollLength + 'px';
         }
       }
@@ -65,25 +69,14 @@ const toggleTabs = () => {
     }
 
     if (target.closest('.nav-arrow_left')) {
-      if (countSlide < tabLength - 1) {
-        const leftPos = repairTypesButtons[countSlide + 1].getBoundingClientRect().left - startPos;
-        const virtualPosRight = repairTypesButtons[tabLength - 1].getBoundingClientRect().right - leftPos;
-        if (virtualPosRight > endPos) {
-          scrollLength += -leftPos;
-          navListRepair.style.marginLeft = scrollLength + 'px';
-          countSlide++;
-        } else if (repairTypesButtons[tabLength - 1].getBoundingClientRect().right > endPos) {
-          scrollLength += -(repairTypesButtons[tabLength - 1].getBoundingClientRect().right - endPos);
-          navListRepair.style.marginLeft = scrollLength + 'px';
-        }
-      }
-    }
-
-    if (target.closest('.nav-arrow_right')) {
+      arrowRight.style.visibility = 'visible';
       if (countSlide > 0) {
-        const rightPos = repairTypesButtons[countSlide - 1].getBoundingClientRect().left -
-          repairTypesButtons[countSlide].getBoundingClientRect().left;
-        const virtualPosRight = repairTypesButtons[0].getBoundingClientRect().right + rightPos;
+        const prevPosLeft = repairTypesButtons[countSlide - 1].getBoundingClientRect().left;
+        const currPosLeft = repairTypesButtons[countSlide].getBoundingClientRect().left;
+        const firstTabPosRight = repairTypesButtons[0].getBoundingClientRect().right;
+        const rightPos =  prevPosLeft - currPosLeft;
+        const virtualPosRight = firstTabPosRight + rightPos;
+
         if (virtualPosRight < startPos) {
           scrollLength += -rightPos;
           navListRepair.style.marginLeft = scrollLength + 'px';
@@ -93,6 +86,28 @@ const toggleTabs = () => {
       if (countSlide === 0) {
         scrollLength = 0;
         navListRepair.style.marginLeft = 0 + 'px';
+        arrowLeft.style.visibility = 'hidden';
+      }
+    }
+
+    if (target.closest('.nav-arrow_right')) {
+      arrowLeft.style.visibility = 'visible';
+      if (countSlide < tabLength - 1) {
+        const nextPosLeft = repairTypesButtons[countSlide + 1].getBoundingClientRect().left;
+        const LastTabPosRight = repairTypesButtons[tabLength - 1].getBoundingClientRect().right;
+        const prevPosRight = repairTypesButtons[tabLength - 1].getBoundingClientRect().right;
+        const leftPos = nextPosLeft - startPos;
+        const virtualPosRight = LastTabPosRight - leftPos;
+
+        if (virtualPosRight > endPos) {
+          scrollLength += -leftPos;
+          navListRepair.style.marginLeft = scrollLength + 'px';
+          countSlide++;
+        } else if (LastTabPosRight > endPos) {
+          scrollLength += -(prevPosRight - endPos);
+          navListRepair.style.marginLeft = scrollLength + 'px';
+          arrowRight.style.visibility = 'hidden';
+        }
       }
     }
   };
