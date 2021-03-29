@@ -1684,6 +1684,10 @@ template,
 .repair-types-slider img {
   width: 100%;
 }
+.repair-types-slider__slide {
+  flex: 0 0 100%;
+  max-width: 100%
+}
 .repair-types-tab {
   width: 39.5%;
 }

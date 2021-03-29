@@ -16,8 +16,8 @@ const startSlider = () => {
   createSlider(reviewsSliderWrapper, 'reviews-item__wrapper', 'reviews-slider__slide', '.reviews');
 
   // * partners slides
-  const partnersSliderWrapper = document.querySelector('.partners-slider-wrap');
-  createSlider(partnersSliderWrapper, 'partners-item__wrapper', 'partners-slider__slide', '.partners');
+  // const partnersSliderWrapper = document.querySelector('.partners-slider-wrap');
+  // createSlider(partnersSliderWrapper, 'partners-item__wrapper', 'partners-slider__slide', '.partners');
 
   // * documents slider
   if (clientWidth <= 1090) {

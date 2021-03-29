@@ -6,7 +6,7 @@ import togglePopUps from '@modules/togglePopUps';
 import validate from '@modules/validate';
 import sendForm from '@modules/sendForm';
 import showHint from '@modules/showHint';
-import tabs from '@modules/tabs';
+import toggleTabs from '@modules/toggleTabs';
 import startSlider from '@modules/startSlider';
 import accordion from '@modules/accordion';
 
@@ -24,4 +24,4 @@ showHint();
 validate();
 sendForm();
 accordion();
-tabs();
+toggleTabs();

@@ -1,7 +1,7 @@
-const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass, curSlide) => {
+const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass, curItems) => {
   const sliderWrapperWidth = sliderWrapper.offsetWidth;
   const itemsWrapper = document.querySelector('.' + itemsWrapperClass);
-  let slides = document.querySelectorAll('.' + slidesClass);
+  let slides = itemsWrapper.querySelectorAll('.' + slidesClass);
   const slidesLength = slides.length;
   const slideStyles = window.getComputedStyle(slides[0]);
   const slideWidth = slides[0].offsetWidth + parseFloat(slideStyles.marginLeft) + parseFloat(slideStyles.marginRight);
@@ -42,7 +42,7 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
   });
 
   if (activeClass === '.popup-transparency') {
-    index = curSlide + 1;
+    index = curItems + 1;
     startPosition = -slideWidth * index;
   } else {
     startPosition = -slideWidth * visibleSlides;
@@ -72,7 +72,7 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
   };
 
   const checkAllItems = () => {
-    slides = document.querySelectorAll('.' + slidesClass);
+    slides = itemsWrapper.querySelectorAll('.' + slidesClass);
   };
 
   const checkRefresh = (refresh) => {
@@ -107,7 +107,7 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
     if (index >= slides.length - 1) return;
     index++;
     scrollSlides();
-    if (activeClass === '.popup-transparency') {
+    if (activeClass === '.popup-transparency' || activeClass === '.repair-types') {
       pagination();
     }
   };
@@ -117,7 +117,7 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
     if (index <= 0) return;
     index--;
     scrollSlides();
-    if (activeClass === '.popup-transparency') {
+    if (activeClass === '.popup-transparency' || activeClass === '.repair-types') {
       pagination();
     }
   };
@@ -139,7 +139,7 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
     startSlide();
   }
 
-  if (activeClass === '.popup-transparency') {
+  if (activeClass === '.popup-transparency' || activeClass === '.repair-types') {
     const sliderCounterTotal = document.querySelector(activeClass + '-slider-wrap .slider-counter-content__total');
     sliderCounterTotal.textContent = slidesLength;
 

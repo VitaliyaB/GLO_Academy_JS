@@ -1,7 +1,7 @@
 import createSlider from '@modules/createSlider';
 
 const togglePopUps = () => {
-  const linkListsMenu = document.querySelectorAll('.link-list-menu .menu-link');
+  const linkListsMenu = document.querySelectorAll('.link-list');
   const closeSign = document.querySelectorAll('.popup .close');
   const linkPrivacy = document.querySelectorAll('.link-privacy');
   const consultationBtn = document.querySelectorAll('.button_wide');
@@ -18,7 +18,7 @@ const togglePopUps = () => {
     const target = event.target;
 
     // * popup repair types
-    if (target.matches('.link-list-menu .menu-link')) {
+    if (target.closest('.link-list')) {
       popupRepairTypes.style.visibility = 'visible';
     }
 
