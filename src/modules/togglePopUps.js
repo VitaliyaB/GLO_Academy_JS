@@ -1,4 +1,5 @@
 import createSlider from '@modules/createSlider';
+import getData from '@modules/getData';
 
 const togglePopUps = () => {
   const linkListsMenu = document.querySelectorAll('.link-list');
@@ -25,6 +26,7 @@ const togglePopUps = () => {
     // * popup repair types
     if (target.closest('.link-list')) {
       popupRepairTypes.style.visibility = 'visible';
+      getData();
     }
 
     // * popup privacy

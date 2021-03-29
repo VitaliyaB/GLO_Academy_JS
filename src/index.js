@@ -9,6 +9,7 @@ import showHint from '@modules/showHint';
 import toggleTabs from '@modules/toggleTabs';
 import startSlider from '@modules/startSlider';
 import accordion from '@modules/accordion';
+import getData from '@modules/getData';
 
 window.onload = () => {
   const body = document.querySelector('.preload');
@@ -25,3 +26,4 @@ validate();
 sendForm();
 accordion();
 toggleTabs();
+getData();

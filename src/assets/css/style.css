@@ -7915,7 +7915,7 @@ div.wave-block:nth-child(17):after {
 .active svg path {
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  stroke: #f48922;
+  stroke: ;
 }
 
 .active:hover svg path {
