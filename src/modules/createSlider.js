@@ -152,7 +152,9 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
     if (target.closest('.slider-arrow_right') ||
       target.closest('.slider-arrow_left') ||
       target.closest('.popup-arrow_transparency_left') ||
-      target.closest('.popup-arrow_transparency_right')) {
+      target.closest('.popup-arrow_transparency_right') ||
+      target.closest('.nav-arrow_right') ||
+      target.closest('.nav-arrow_left')) {
       checkAllItems();
 
       if (activeClass === '.formula' || activeClass === '.problems') {
@@ -163,11 +165,15 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
         });
       }
 
-      if (target.closest('.slider-arrow_right') || target.closest('.popup-arrow_transparency_right')) {
+      if (target.closest('.slider-arrow_right') ||
+        target.closest('.popup-arrow_transparency_right') ||
+        target.closest('.nav-arrow_right')) {
         scrollRight();
       }
 
-      if (target.closest('.slider-arrow_left') || target.closest('.popup-arrow_transparency_left')) {
+      if (target.closest('.slider-arrow_left') ||
+        target.closest('.popup-arrow_transparency_left') ||
+        target.closest('.nav-arrow_left')) {
         scrollLeft();
       }
     }
