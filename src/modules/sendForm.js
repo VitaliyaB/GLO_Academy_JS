@@ -5,9 +5,12 @@ const sendForm = () => {
   const statusMessage = document.createElement('div');
   statusMessage.style.cssText = 'font-size: 2rem; color: white; margin-top: 1em;';
 
-  const postData = (formData) => fetch('../../server.php', {
+  const postData = (formData) => fetch('./server.php', {
     method: 'POST',
-    body: formData
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(Object.fromEntries(formData))
   });
 
   const submitForm = (event) => {
@@ -126,8 +129,6 @@ const sendForm = () => {
       }
     });
   };
-
-
 
   feedbackForm.forEach((item) => {
     item.addEventListener('submit', submitForm);
