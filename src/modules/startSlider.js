@@ -19,6 +19,18 @@ const startSlider = () => {
   const partnersSliderWrapper = document.querySelector('.partners-slider-wrap');
   createSlider(partnersSliderWrapper, 'partners-item__wrapper', 'partners-slider__slide', '.partners');
 
+  // * portfolio slider
+  const portfolioSliderWrapper = document.querySelector('.portfolio-slider-wrap');
+  createSlider(portfolioSliderWrapper, 'portfolio-item__wrapper', 'portfolio-slider__slide',
+    '.portfolioDesktop');
+
+  if (clientWidth <= 575) {
+    // * portfolio slider
+    const portfolioSliderMobileWrapper = document.querySelector('.portfolio-slider-wrap');
+    createSlider(portfolioSliderMobileWrapper, 'portfolio-mobile-item__wrapper', 'portfolio-slider__slide-frame',
+      '.portfolio');
+  }
+
   // * documents slider
   if (clientWidth <= 1090) {
     const transparencySliderWrapper = document.querySelector('.transparency-slider-wrap');

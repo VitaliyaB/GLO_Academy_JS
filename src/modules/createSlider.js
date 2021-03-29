@@ -13,36 +13,55 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
   let interval;
   let startPosition;
   let index;
+  let arrowRight;
+  let arrowLeft;
+  let portfolioText;
+  let prevText = 0;
+
+  if (activeClass === '.popup-portfolio') {
+    const popUpPortfolio = document.querySelector(activeClass);
+    portfolioText = popUpPortfolio.querySelectorAll('.popup-portfolio-text');
+  }
+
+  if (activeClass === '.portfolioDesktop') {
+    arrowRight = document.querySelector('.slider-arrow_right-portfolio');
+    arrowLeft = document.querySelector('.slider-arrow_left-portfolio');
+  }
 
   // * cloning items
-  for (let i = 0; i < visibleSlides; i++) {
-    const clone = slides[i].cloneNode(true);
-    cloneFirstItems.push(clone);
+  if (activeClass !== '.portfolioDesktop') {
+    for (let i = 0; i < visibleSlides; i++) {
+      const clone = slides[i].cloneNode(true);
+      cloneFirstItems.push(clone);
+    }
+
+    for (let i = slides.length - 1; i >= slides.length - visibleSlides; i--) {
+      const clone = slides[i].cloneNode(true);
+      cloneLastItems.push(clone);
+    }
+
+    cloneFirstItems.forEach((item, idx) => {
+      if (idx === 0) {
+        item.id = 'first-clone';
+        cloneFirst = item;
+      }
+      itemsWrapper.append(item);
+    });
+
+    cloneLastItems.forEach((item, idx, arr) => {
+      if (idx === arr.length - 1) {
+        item.id = 'last-clone';
+        cloneLast = item;
+      }
+      itemsWrapper.prepend(item);
+    });
   }
 
-  for (let i = slides.length - 1; i >= slides.length - visibleSlides; i--) {
-    const clone = slides[i].cloneNode(true);
-    cloneLastItems.push(clone);
-  }
-
-  cloneFirstItems.forEach((item, idx) => {
-    if (idx === 0) {
-      item.id = 'first-clone';
-      cloneFirst = item;
-    }
-    itemsWrapper.append(item);
-  });
-
-  cloneLastItems.forEach((item, idx, arr) => {
-    if (idx === arr.length - 1) {
-      item.id = 'last-clone';
-      cloneLast = item;
-    }
-    itemsWrapper.prepend(item);
-  });
-
-  if (activeClass === '.popup-transparency') {
+  if (activeClass === '.popup-transparency' || activeClass === '.popup-portfolio') {
     index = curItems + 1;
+    startPosition = -slideWidth * index;
+  } else if (activeClass === '.portfolioDesktop') {
+    index = 0;
     startPosition = -slideWidth * index;
   } else {
     startPosition = -slideWidth * visibleSlides;
@@ -75,9 +94,18 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
     slides = itemsWrapper.querySelectorAll('.' + slidesClass);
   };
 
+  // * for active infinity slider
   const checkRefresh = (refresh) => {
     if (activeClass === '.formula' || activeClass === '.problems') {
       switchActive(refresh);
+    }
+  };
+
+  const toggleText = () => {
+    if (activeClass === '.popup-portfolio') {
+      portfolioText[prevText].style.display = 'none';
+      prevText = index;
+      portfolioText[index].style.display = 'flex';
     }
   };
 
@@ -104,20 +132,47 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
 
   const scrollRight = () => {
     checkAllItems();
+
     if (index >= slides.length - 1) return;
+    if (activeClass === '.portfolioDesktop') {
+      if (window.offsetWidth > 575) {
+        arrowLeft.style.display = 'flex';
+        if (index === slidesLength - 1 - visibleSlides) {
+          arrowRight.style.display = 'none';
+        }
+      }
+    }
     index++;
     scrollSlides();
-    if (activeClass === '.popup-transparency' || activeClass === '.repair-types') {
+    if (activeClass === '.popup-transparency' ||
+      activeClass === '.repair-types' ||
+      activeClass === '.portfolio' ||
+      activeClass === '.popup-portfolio') {
+
+      toggleText();
       pagination();
     }
   };
 
   const scrollLeft = () => {
     checkAllItems();
+    if (activeClass === '.portfolioDesktop') {
+      if (window.offsetWidth > 575) {
+        arrowRight.style.display = 'flex';
+        if (index === 1) {
+          arrowLeft.style.display = 'none';
+        }
+      }
+    }
     if (index <= 0) return;
     index--;
     scrollSlides();
-    if (activeClass === '.popup-transparency' || activeClass === '.repair-types') {
+    if (activeClass === '.popup-transparency' ||
+      activeClass === '.repair-types' ||
+      activeClass === '.portfolio' ||
+      activeClass === '.popup-portfolio') {
+
+      toggleText();
       pagination();
     }
   };
@@ -139,10 +194,15 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
     startSlide();
   }
 
-  if (activeClass === '.popup-transparency' || activeClass === '.repair-types') {
+  if (activeClass === '.popup-transparency' ||
+    activeClass === '.repair-types' ||
+    activeClass === '.portfolio' ||
+    activeClass === '.popup-portfolio') {
+
     const sliderCounterTotal = document.querySelector(activeClass + '-slider-wrap .slider-counter-content__total');
     sliderCounterTotal.textContent = slidesLength;
 
+    toggleText();
     pagination();
   }
 
@@ -154,7 +214,14 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
       target.closest('.popup-arrow_transparency_left') ||
       target.closest('.popup-arrow_transparency_right') ||
       target.closest('.nav-arrow_right') ||
-      target.closest('.nav-arrow_left')) {
+      target.closest('.nav-arrow_left') ||
+      target.closest('.slider-arrow_right-portfolio') ||
+      target.closest('.slider-arrow_left-portfolio') ||
+      target.closest('.slider-arrow-tablet-mobile_left') ||
+      target.closest('.slider-arrow-tablet-mobile_right') ||
+      target.closest('.popup-arrow_left') ||
+      target.closest('.popup-arrow_right')) {
+
       checkAllItems();
 
       if (activeClass === '.formula' || activeClass === '.problems') {
@@ -167,13 +234,21 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
 
       if (target.closest('.slider-arrow_right') ||
         target.closest('.popup-arrow_transparency_right') ||
-        target.closest('.nav-arrow_right')) {
+        target.closest('.nav-arrow_right') ||
+        target.closest('.slider-arrow_right-portfolio') ||
+        target.closest('.slider-arrow-tablet-mobile_right') ||
+        target.closest('.popup-arrow_right')) {
+
         scrollRight();
       }
 
       if (target.closest('.slider-arrow_left') ||
         target.closest('.popup-arrow_transparency_left') ||
-        target.closest('.nav-arrow_left')) {
+        target.closest('.nav-arrow_left') ||
+        target.closest('.slider-arrow_left-portfolio') ||
+        target.closest('.slider-arrow-tablet-mobile_left') ||
+        target.closest('.popup-arrow_left')) {
+
         scrollLeft();
       }
     }
@@ -181,7 +256,7 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
 
   sliderWrapper.addEventListener('transitionend', (event) => {
     const target = event.target;
-    if (!target.classList.contains(itemsWrapperClass)) return;
+    if (!target.classList.contains(itemsWrapperClass) || activeClass === '.portfolioDesktop') return;
 
     checkAllItems();
 

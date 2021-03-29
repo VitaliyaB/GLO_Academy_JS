@@ -6,13 +6,18 @@ const togglePopUps = () => {
   const linkPrivacy = document.querySelectorAll('.link-privacy');
   const consultationBtn = document.querySelectorAll('.button_wide');
   const transparencyItemImg = document.querySelectorAll('.transparency-item__img');
+  const portfolioSliderFrameMobile = document.
+    querySelectorAll('.portfolio-slider-mobile .portfolio-slider__slide-frame');
+  const portfolioSliderFrameDesktop = document.querySelectorAll('.portfolio-slider .portfolio-slider__slide-frame');
 
   const popupRepairTypes = document.querySelector('.popup-repair-types');
   const popupPrivacy = document.querySelector('.popup-privacy');
   const popupConsultation = document.querySelector('.popup-consultation');
   const popupTransparency = document.querySelector('.popup-transparency');
+  const popupPortfolio = document.querySelector('.popup-portfolio');
 
   let clonePopUpTransparencyWrap;
+  let clonePopUpPortfolioWrap;
 
   const handlerPopUp = (event, idx) => {
     const target = event.target;
@@ -47,6 +52,16 @@ const togglePopUps = () => {
         'popup-transparency-slider__slide', '.popup-transparency', idx);
     }
 
+    // * popup portfolio
+    if (target.closest('.portfolio-slider__slide-frame')) {
+      popupPortfolio.style.visibility = 'visible';
+      // * popup document slider
+      clonePopUpPortfolioWrap = document.querySelector('.popup-portfolio-item__wrapper').cloneNode(true);
+      const popupTransparencySliderWrapper = document.querySelector('.popup-portfolio-slider-wrap');
+      createSlider(popupTransparencySliderWrapper, 'popup-portfolio-item__wrapper',
+        'popup-portfolio-slider__slide', '.popup-portfolio', idx);
+    }
+
     // * popup close
     if (target.classList.contains('close')) {
       const popUpBlock = target.closest('.popup');
@@ -54,6 +69,10 @@ const togglePopUps = () => {
 
       if (target.closest('.popup-transparency')) {
         document.querySelector('.popup-transparency-item__wrapper').replaceWith(clonePopUpTransparencyWrap);
+      }
+
+      if (target.closest('.popup-portfolio')) {
+        document.querySelector('.popup-portfolio-item__wrapper').replaceWith(clonePopUpPortfolioWrap);
       }
     }
   };
@@ -84,6 +103,20 @@ const togglePopUps = () => {
       handlerPopUp(event, idx);
     });
   });
+
+  // * popup portfolio
+  portfolioSliderFrameMobile.forEach((item, idx) => {
+    item.addEventListener('click', (event) => {
+      handlerPopUp(event, idx);
+    });
+  });
+
+  portfolioSliderFrameDesktop.forEach((item, idx) => {
+    item.addEventListener('click', (event) => {
+      handlerPopUp(event, idx);
+    });
+  });
+
 };
 
 export default togglePopUps;

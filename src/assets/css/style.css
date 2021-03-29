@@ -2158,6 +2158,10 @@ div.wave-block:nth-child(17):after {
   padding-top: 83px;
   z-index: 2;
 }
+.portfolio .wrapper_middle {
+  padding-left: 0px;
+  padding-right: 2px;
+}
 @media (max-width: 1024px) {
   .portfolio {
     background: #f8f4ef;
@@ -2229,6 +2233,11 @@ div.wave-block:nth-child(17):after {
     width: 92%;
   }
 }
+@media (max-width: 900px) {
+  .portfolio-slider {
+    width: 82%;
+  }
+}
 @media (max-width: 575px) {
   .portfolio-slider {
     width: 100%;
@@ -2247,6 +2256,9 @@ div.wave-block:nth-child(17):after {
     margin-right: auto;
   }
 }
+.portfolio-item__wrapper {
+  display: flex;
+}
 .portfolio-slider__slide {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2259,12 +2271,27 @@ div.wave-block:nth-child(17):after {
   flex-wrap: wrap;
   max-height: 504px;
 }
+@media (max-width: 1140px) {
+  .portfolio-slider__slide {
+    width: 324px;
+  }
+}
+@media (max-width: 1024px) {
+  .portfolio-slider__slide {
+    width: auto;
+  }
+}
 .portfolio-slider__slide-frame {
   position: relative;
 }
 @media (min-width: 901px) {
   .portfolio-slider__slide-frame {
     width: 100%;
+  }
+}
+@media (max-width: 575px) {
+  .portfolio-slider__slide-frame {
+    width: 288px;
   }
 }
 .portfolio-slider__slide-frame:before {
@@ -2292,6 +2319,10 @@ div.wave-block:nth-child(17):after {
   border-radius: 20px;
   height: 210px;
   overflow: hidden;
+}
+
+.portfolio-mobile-item__wrapper {
+  display: flex;
 }
 
 .transparency {
@@ -6029,6 +6060,7 @@ div.wave-block:nth-child(17):after {
 .popup-portfolio-slider {
   position: relative;
   height: 100%;
+  overflow: hidden;
 }
 @media (max-width: 1024px) {
   .popup-portfolio-slider {
@@ -6052,9 +6084,13 @@ div.wave-block:nth-child(17):after {
     height: auto;
   }
 }
+.popup-portfolio-item__wrapper {
+  display: flex;
+}
 .popup-portfolio-slider__slide {
   height: 100%;
-  overflow: hidden;
+  flex: 0 0 100%;
+  max-width: 100%;
 }
 @media (max-width: 575px) {
   .popup-portfolio-slider__slide {
@@ -6090,8 +6126,11 @@ div.wave-block:nth-child(17):after {
 }
 @media (max-width: 1024px) and (min-width: 576px) {
   .popup-portfolio-text {
+    -ms-flex-direction: row;
+    flex-direction: row;
     width: 100%;
     height: 293px;
+    justify-content: space-around;
   }
 }
 @media (max-width: 575px) {
@@ -8104,10 +8143,20 @@ div.wave-block:nth-child(17):after {
     left: -50px;
   }
 }
+@media (max-width: 575px) {
+  #portfolio-arrow_left {
+    display: none;
+  }
+}
 
 @media (max-width: 900px) {
   #portfolio-arrow_right {
     right: -50px;
+  }
+}
+@media (max-width: 575px) {
+  #portfolio-arrow_right {
+    display: none;
   }
 }
 
