@@ -19,6 +19,12 @@ const startSlider = () => {
   const partnersSliderWrapper = document.querySelector('.partners-slider-wrap');
   createSlider(partnersSliderWrapper, 'partners-item__wrapper', 'partners-slider__slide', '.partners');
 
+  // * documents slider
+  if (clientWidth <= 1090) {
+    const transparencySliderWrapper = document.querySelector('.transparency-slider-wrap');
+    createSlider(transparencySliderWrapper, 'transparency-item__wrapper', 'transparency-slider__slide',
+      '.transparency');
+  }
 };
 
 export default startSlider;

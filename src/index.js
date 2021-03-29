@@ -18,8 +18,8 @@ window.onload = () => {
 togglePhones();
 toggleMenu();
 scrollPage();
-startSlider();
 togglePopUps();
+startSlider();
 showHint();
 validate();
 sendForm();

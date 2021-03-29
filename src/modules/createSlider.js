@@ -1,7 +1,8 @@
-const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass) => {
+const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass, curSlide) => {
   const sliderWrapperWidth = sliderWrapper.offsetWidth;
   const itemsWrapper = document.querySelector('.' + itemsWrapperClass);
   let slides = document.querySelectorAll('.' + slidesClass);
+  const slidesLength = slides.length;
   const slideStyles = window.getComputedStyle(slides[0]);
   const slideWidth = slides[0].offsetWidth + parseFloat(slideStyles.marginLeft) + parseFloat(slideStyles.marginRight);
   const visibleSlides = Math.floor(sliderWrapperWidth / slideWidth);
@@ -10,6 +11,8 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
   const cloneFirstItems = [];
   const cloneLastItems = [];
   let interval;
+  let startPosition;
+  let index;
 
   // * cloning items
   for (let i = 0; i < visibleSlides; i++) {
@@ -38,8 +41,13 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
     itemsWrapper.prepend(item);
   });
 
-  const startPosition = -slideWidth * visibleSlides;
-  let index = visibleSlides;
+  if (activeClass === '.popup-transparency') {
+    index = curSlide + 1;
+    startPosition = -slideWidth * index;
+  } else {
+    startPosition = -slideWidth * visibleSlides;
+    index = visibleSlides;
+  }
 
   itemsWrapper.style.transform = `translateX(${startPosition}px)`;
 
@@ -79,11 +87,29 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
     itemsWrapper.style.transition = '.7s';
   };
 
+  const pagination = () => {
+    const sliderCounterCurrent = document.querySelector(activeClass + '-slider-wrap .slider-counter-content__current');
+    let page = 1;
+
+    if (index > slidesLength) {
+      page = index - slidesLength;
+    } else if (index === 0) {
+      page = slidesLength;
+    } else {
+      page = index;
+    }
+
+    sliderCounterCurrent.textContent = page;
+  };
+
   const scrollRight = () => {
     checkAllItems();
     if (index >= slides.length - 1) return;
     index++;
     scrollSlides();
+    if (activeClass === '.popup-transparency') {
+      pagination();
+    }
   };
 
   const scrollLeft = () => {
@@ -91,6 +117,9 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
     if (index <= 0) return;
     index--;
     scrollSlides();
+    if (activeClass === '.popup-transparency') {
+      pagination();
+    }
   };
 
   const startSlide = () => {
@@ -110,10 +139,20 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
     startSlide();
   }
 
+  if (activeClass === '.popup-transparency') {
+    const sliderCounterTotal = document.querySelector(activeClass + '-slider-wrap .slider-counter-content__total');
+    sliderCounterTotal.textContent = slidesLength;
+
+    pagination();
+  }
+
   const scrollElem = (event) => {
     const target = event.target;
 
-    if (target.closest('.slider-arrow_right') || target.closest('.slider-arrow_left')) {
+    if (target.closest('.slider-arrow_right') ||
+      target.closest('.slider-arrow_left') ||
+      target.closest('.popup-arrow_transparency_left') ||
+      target.closest('.popup-arrow_transparency_right')) {
       checkAllItems();
 
       if (activeClass === '.formula' || activeClass === '.problems') {
@@ -124,11 +163,11 @@ const createSlider = (sliderWrapper, itemsWrapperClass, slidesClass, activeClass
         });
       }
 
-      if (target.closest('.slider-arrow_right')) {
+      if (target.closest('.slider-arrow_right') || target.closest('.popup-arrow_transparency_right')) {
         scrollRight();
       }
 
-      if (target.closest('.slider-arrow_left')) {
+      if (target.closest('.slider-arrow_left') || target.closest('.popup-arrow_transparency_left')) {
         scrollLeft();
       }
     }
